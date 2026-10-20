@@ -1,0 +1,250 @@
+/* Gabarit commun — Groupe 4. Polices locales : Inter, Inter Display, Caladea. */
+:root {
+  --ink: #1d2433;
+  --muted: #5d6677;
+  --soft: #8a92a1;
+  --teal: #0f6b66;
+  --teal-50: #e6f1f0;
+  --teal-100: #cfe5e2;
+  --terra: #b4462a;
+  --terra-50: #f9ece6;
+  --saffron: #a8740b;
+  --saffron-50: #fbf3dd;
+  --sand: #f6f2eb;
+  --sand-2: #efe9de;
+  --line: #e2dbcf;
+  --paper: #ffffff;
+  --e1: #0f6b66; --e2: #35558f; --e3: #7a4785; --e4: #5b741c; --e5: #9a5a12;
+}
+
+@page {
+  size: A4;
+  margin: 17mm 16mm 17mm 16mm;
+  @top-left { font: 500 7.2pt "Inter"; color: #8a92a1; letter-spacing: .02em; }
+  @top-right { font: 500 7.2pt "Inter"; color: #8a92a1; letter-spacing: .02em; }
+  @bottom-left { content: "Groupe 4 · La Civilisation, ma Mère !… · Driss Chraïbi"; font: 400 7.2pt "Inter"; color: #8a92a1; }
+  @bottom-right { content: counter(page) " / " counter(pages); font: 600 7.4pt "Inter"; color: #5d6677; }
+}
+@page cover {
+  margin: 0;
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+@page land {
+  size: A4 landscape;
+  margin: 9mm 10mm 9mm 10mm;
+  @top-left { content: none; } @top-right { content: none; }
+  @bottom-left { content: none; } @bottom-right { content: none; }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 9.5pt/1.48 "Inter", sans-serif;
+  hyphens: auto; -webkit-hyphens: auto;
+  orphans: 3; widows: 3;
+}
+
+/* ---------- Titres ---------- */
+h1, h2, h3, h4 { font-family: "Inter Display", "Inter", sans-serif; margin: 0; line-height: 1.2; break-after: avoid; page-break-after: avoid; }
+h1.sec {
+  break-before: page; font-size: 20pt; font-weight: 700; letter-spacing: -.01em;
+  display: flex; align-items: baseline; gap: 10px; margin: 0 0 4mm;
+  padding-bottom: 3mm; border-bottom: 2px solid var(--ink);
+}
+h1.sec.first { break-before: auto; }
+h1.sec .num { color: var(--teal); font-size: 12pt; font-weight: 700; min-width: 7mm; }
+h2 { font-size: 12.5pt; font-weight: 700; margin: 6mm 0 2.5mm; color: var(--ink); }
+h2 .tag { margin-left: 6px; vertical-align: 2px; }
+h3 { font-size: 10.2pt; font-weight: 700; margin: 4.5mm 0 1.8mm; }
+.lead { font-size: 10.4pt; color: var(--muted); margin: 0 0 4mm; max-width: 165mm; }
+p { margin: 0 0 2.4mm; }
+ul, ol { margin: 0 0 2.6mm; padding-left: 5mm; }
+li { margin: 0 0 1.1mm; }
+strong { font-weight: 650; }
+.muted { color: var(--muted); }
+.small { font-size: 8.2pt; }
+.keep { break-inside: avoid; page-break-inside: avoid; }
+.nobr { white-space: nowrap; }
+
+/* ---------- Étiquettes ---------- */
+.lvl { display: inline-block; font: 700 6.4pt/1 "Inter"; letter-spacing: .07em; text-transform: uppercase;
+  padding: 2.2px 5px 2px; border-radius: 3px; white-space: nowrap; vertical-align: 1px; }
+.lvl-EXIGE { background: var(--terra); color: #fff; }
+.lvl-RECO { background: var(--teal-50); color: var(--teal); box-shadow: inset 0 0 0 1px var(--teal-100); }
+.lvl-HYPO { background: var(--saffron-50); color: var(--saffron); box-shadow: inset 0 0 0 1px #ead39a; }
+.who { display: inline-block; font: 700 6.8pt/1 "Inter"; color: #fff; padding: 2.4px 5px; border-radius: 9px; white-space: nowrap; margin: 0 1px 1px 0; }
+.who-1 { background: var(--e1); } .who-2 { background: var(--e2); } .who-3 { background: var(--e3); }
+.who-4 { background: var(--e4); } .who-5 { background: var(--e5); } .who-all { background: var(--ink); }
+.crit { color: var(--terra); font-weight: 700; }
+.code { font: 700 7.6pt "Inter"; letter-spacing: .03em; color: var(--ink); background: var(--sand-2); padding: 1.5px 4px; border-radius: 3px; white-space: nowrap; }
+
+/* ---------- Tableaux ---------- */
+table { width: 100%; border-collapse: collapse; margin: 1.5mm 0 4mm; font-size: 8.4pt; line-height: 1.38; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+th { text-align: left; font: 700 6.9pt/1.25 "Inter"; text-transform: uppercase; letter-spacing: .06em; color: var(--muted);
+  background: var(--sand); padding: 2.2mm 2mm 1.9mm; border-bottom: 1.5px solid var(--ink); vertical-align: bottom; }
+td { padding: 1.9mm 2mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr:last-child td { border-bottom: 1.5px solid var(--ink); }
+td.c, th.c { text-align: center; }
+td.r, th.r { text-align: right; }
+td.strong { font-weight: 650; }
+table.zebra tbody tr:nth-child(even) td { background: #fbf9f5; }
+table.blank td { height: 10.5mm; }
+table.blank td.lbl { height: auto; font-weight: 600; color: var(--muted); background: #fbf9f5; }
+table.blank.tall td { height: 15mm; }
+tr.total td { font-weight: 700; background: var(--sand); }
+
+/* ---------- Encadrés ---------- */
+.box { border-radius: 6px; padding: 3.6mm 4.2mm; margin: 0 0 4mm; break-inside: avoid; background: var(--sand); }
+.box.teal { background: var(--teal-50); }
+.box.terra { background: var(--terra-50); }
+.box.saffron { background: var(--saffron-50); }
+.box.line { background: #fff; border: 1px solid var(--line); }
+.box h3 { margin-top: 0; }
+.box > :last-child { margin-bottom: 0; }
+.kicker { font: 700 6.8pt "Inter"; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2mm; }
+.box.terra .kicker { color: var(--terra); }
+.box.saffron .kicker { color: var(--saffron); }
+.question-centrale { font: 600 13pt/1.38 "Inter Display"; color: var(--ink); margin: 0; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3.5mm; }
+.grid2 > .box, .grid3 > .box { margin: 0; }
+.stat { font: 700 20pt/1 "Inter Display"; color: var(--teal); }
+.stat-l { font-size: 7.6pt; color: var(--muted); margin-top: 1mm; }
+
+/* ---------- Citations ---------- */
+.q { font-family: "Caladea", serif; font-style: italic; font-size: 10pt; color: #2a3142; }
+.ref { font-size: 7.2pt; color: var(--soft); white-space: nowrap; font-style: normal; font-family: "Inter"; }
+blockquote.verbatim { margin: 0 0 3mm; padding: 3mm 4mm; border-left: 3px solid var(--terra); background: #fff; font-size: 9.4pt; }
+blockquote.verbatim .src { display: block; font-size: 7pt; color: var(--soft); margin-top: 1.2mm; letter-spacing: .03em; text-transform: uppercase; }
+
+/* ---------- Sommaire ---------- */
+.toc { list-style: none; padding: 0; margin: 2mm 0 0; }
+.toc li { display: flex; align-items: baseline; gap: 3mm; padding: 2.4mm 0; border-bottom: 1px solid var(--line); margin: 0; font-size: 10.2pt; }
+.toc .n { color: var(--teal); font-weight: 700; width: 7mm; }
+.toc .t { flex: 1; }
+.toc .p { font-weight: 700; font-variant-numeric: tabular-nums; min-width: 8mm; text-align: right; }
+
+/* ---------- Couverture ---------- */
+.cover { page: cover; height: 297mm; width: 210mm; position: relative; overflow: hidden; background: var(--paper); }
+.cover .band { position: absolute; inset: 0 0 auto 0; height: 128mm; background: var(--teal); color: #fff; overflow: hidden; }
+.cover .band svg { position: absolute; right: -18mm; top: -10mm; width: 150mm; height: 150mm; opacity: .16; }
+.cover .band .inner { position: absolute; left: 20mm; right: 20mm; bottom: 15mm; }
+.cover .eyebrow { font: 700 8pt "Inter"; letter-spacing: .2em; text-transform: uppercase; opacity: .85; }
+.cover h1 { font: 700 30pt/1.08 "Inter Display"; letter-spacing: -.015em; margin: 4mm 0 4mm; max-width: 160mm; }
+.cover .sub { font: 400 12pt/1.35 "Inter"; opacity: .92; }
+.cover .sub em { font-family: "Caladea"; font-size: 13.5pt; }
+.cover .doc { position: absolute; left: 20mm; right: 20mm; top: 142mm; }
+.cover .doctype { font: 700 22pt/1.1 "Inter Display"; color: var(--ink); }
+.cover .doctype .role { display: block; font: 500 13pt/1.3 "Inter"; color: var(--muted); margin-top: 2mm; }
+.cover .accent { width: 18mm; height: 3px; background: var(--terra); margin: 5mm 0 6mm; }
+.cover .meta { display: grid; grid-template-columns: 38mm 1fr; row-gap: 2.6mm; font-size: 9.4pt; max-width: 150mm; }
+.cover .meta .k { color: var(--muted); font-size: 7.6pt; text-transform: uppercase; letter-spacing: .08em; padding-top: 1px; }
+.cover .meta .fill { border-bottom: 1px solid var(--soft); min-height: 5.5mm; }
+.cover .foot { position: absolute; left: 20mm; right: 20mm; bottom: 14mm; display: flex; justify-content: space-between; font-size: 7.6pt; color: var(--soft); border-top: 1px solid var(--line); padding-top: 3mm; }
+.cover .mission { margin-top: 7mm; max-width: 160mm; font-size: 10pt; color: var(--ink); border-left: 3px solid var(--teal); padding-left: 4mm; }
+
+/* ---------- Chronologie ---------- */
+.chrono { margin: 0; padding: 0; list-style: none; }
+.chrono > li { display: grid; grid-template-columns: 11mm 1fr; gap: 3mm; margin: 0 0 2.2mm; break-inside: avoid; }
+.chrono .dot { width: 9mm; height: 9mm; border-radius: 50%; background: var(--teal); color: #fff; font: 700 9pt/9mm "Inter Display"; text-align: center; }
+.chrono .part-II .dot { background: var(--terra); }
+.chrono .head { display: flex; gap: 2.5mm; align-items: baseline; flex-wrap: wrap; }
+.chrono .head strong { font: 700 10.2pt "Inter Display"; }
+.chrono .quotes { margin: 1.2mm 0 0; padding: 0; list-style: none; }
+.chrono .quotes li { margin: 0 0 .3mm; line-height: 1.32; }
+.chrono .quotes .q { font-size: 9.2pt; }
+.part-banner { font: 700 7.4pt "Inter"; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 2mm 0 3mm; display: flex; align-items: center; gap: 3mm; }
+.part-banner::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* ---------- Épisodes ---------- */
+.episode { border: 1px solid var(--line); border-radius: 7px; margin: 0 0 4mm; break-inside: avoid; overflow: hidden; }
+.episode .eh { display: flex; justify-content: space-between; align-items: center; background: var(--sand); padding: 2.6mm 4mm; }
+.episode .eh .t { font: 700 11pt "Inter Display"; }
+.episode .eb { padding: 3mm 4mm 3.2mm; }
+.three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; margin-bottom: 2.6mm; }
+.three > div { border-top: 2.5px solid var(--teal); padding-top: 1.6mm; font-size: 8.4pt; }
+.three > div .lab { font: 700 6.6pt "Inter"; text-transform: uppercase; letter-spacing: .08em; color: var(--teal); }
+.three > div .q { font-size: 8.8pt; display: block; margin-top: 1mm; }
+.verdict { font-weight: 700; color: var(--teal); }
+.verdict.top { color: var(--terra); }
+.score { display: inline-flex; gap: 1px; vertical-align: -1px; }
+.score i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); display: inline-block; }
+.score i.on { background: var(--teal); }
+
+/* ---------- Étapes (feuille de route) ---------- */
+.step { display: grid; grid-template-columns: 19mm 1fr; border: 1px solid var(--line); border-radius: 6px; margin: 0 0 2.6mm; break-inside: avoid; overflow: hidden; }
+.step .side { background: var(--sand); padding: 2.6mm 2mm; text-align: center; border-right: 1px solid var(--line); }
+.step.is-crit .side { background: var(--terra-50); border-right: 2.5px solid var(--terra); }
+.step.cp .side { background: var(--ink); color: #fff; }
+.step .side .c { font: 700 11pt "Inter Display"; display: block; }
+.step .side .d { font-size: 7.4pt; color: var(--muted); display: block; margin-top: .8mm; }
+.step.cp .side .d { color: #cfd5df; }
+.step .side .crit-flag { display: block; font: 700 6pt "Inter"; letter-spacing: .06em; text-transform: uppercase; color: var(--terra); margin-top: 1.2mm; }
+.step.cp .side .crit-flag { color: #ffb59f; }
+.step .main { padding: 2.4mm 3.4mm 2.6mm; }
+.step .title { display: flex; justify-content: space-between; gap: 3mm; align-items: baseline; }
+.step .title strong { font: 700 9.8pt "Inter Display"; }
+.step .kv { display: grid; grid-template-columns: 22mm 1fr 22mm 1fr; gap: .9mm 2.5mm; font-size: 8.1pt; margin-top: 1.4mm; }
+.step .kv .k { color: var(--soft); font-size: 6.8pt; text-transform: uppercase; letter-spacing: .06em; padding-top: .6mm; }
+.step .kv .wide { grid-column: span 3; }
+.step ul { margin: 1mm 0 0; padding-left: 4mm; font-size: 8.2pt; }
+.step ul li { margin: 0 0 .3mm; }
+
+/* ---------- Chemin critique ---------- */
+.path { display: flex; flex-wrap: wrap; align-items: center; gap: 1.6mm; margin: 1mm 0 4mm; }
+.path .n { background: var(--terra); color: #fff; font: 700 8pt "Inter"; padding: 1.6mm 2.4mm; border-radius: 4px; }
+.path .a { color: var(--terra); font-weight: 700; }
+
+/* ---------- Gantt ---------- */
+table.gantt { table-layout: fixed; font-size: 7pt; }
+table.gantt th { text-align: center; padding: 1.8mm .6mm; font-size: 6.6pt; }
+table.gantt th.first { text-align: left; width: 21mm; }
+table.gantt th.tot { width: 12mm; }
+table.gantt td { padding: 1.2mm .5mm; text-align: center; border-left: 1px solid var(--line); height: 15mm; vertical-align: middle; }
+table.gantt td.first { text-align: left; border-left: 0; padding-left: 1.5mm; }
+table.gantt td.jj { background: var(--sand); }
+table.gantt th.jj { background: var(--sand-2); }
+.chip { display: block; margin: .5mm auto; font: 700 6.4pt/1 "Inter"; padding: 1.4mm .4mm; border-radius: 3px; color: #fff; text-align: center; }
+.chip.c1 { background: var(--e1); } .chip.c2 { background: var(--e2); } .chip.c3 { background: var(--e3); }
+.chip.c4 { background: var(--e4); } .chip.c5 { background: var(--e5); }
+.chip.is-crit { box-shadow: 0 0 0 1.4px #fff, 0 0 0 2.6px var(--terra); }
+.chip.hypo { background: #fff !important; color: var(--saffron); box-shadow: inset 0 0 0 1px var(--saffron); }
+
+/* ---------- Cases à cocher et lignes ---------- */
+.checks { list-style: none; padding: 0; margin: 0 0 3mm; }
+.checks li { display: grid; grid-template-columns: 6mm 1fr auto; gap: 2mm; align-items: start; padding: 1.9mm 0; border-bottom: 1px solid var(--line); margin: 0; break-inside: avoid; }
+.checks .bx { width: 4mm; height: 4mm; border: 1.4px solid var(--ink); border-radius: 1.2mm; margin-top: .4mm; }
+.ruled > div { height: 8.4mm; border-bottom: 1px solid #cfc7b9; }
+.fillline { border-bottom: 1px solid #cfc7b9; min-height: 8mm; }
+.field { display: grid; grid-template-columns: 50mm 1fr; align-items: end; gap: 3mm; padding: 2.4mm 0 0; }
+.field .k { font-weight: 650; font-size: 9pt; }
+.field .v { border-bottom: 1px solid #cfc7b9; height: 7mm; }
+.cr-page { break-before: page; }
+
+/* ---------- Kanban ---------- */
+.kanban-page { page: land; width: 277mm; height: 192mm; display: flex; flex-direction: column; }
+.kb-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 2.2mm; border-bottom: 2px solid var(--ink); margin-bottom: 2.6mm; }
+.kb-head h1 { font: 700 15pt "Inter Display"; }
+.kb-head .sub { font-size: 7.6pt; color: var(--muted); }
+.kb-legend { display: flex; gap: 3mm; align-items: center; font-size: 6.8pt; color: var(--muted); flex-wrap: wrap; justify-content: flex-end; max-width: 150mm; }
+.kb { flex: 1; display: grid; grid-template-columns: 2.75fr 1fr .85fr .85fr; gap: 2.6mm; min-height: 0; }
+.col { background: var(--sand); border-radius: 6px; padding: 2mm; display: flex; flex-direction: column; min-height: 0; }
+.col h2 { font: 700 8.4pt "Inter"; text-transform: uppercase; letter-spacing: .1em; margin: .4mm .8mm 2mm; display: flex; justify-content: space-between; }
+.col h2 .count { color: var(--soft); }
+.col.todo .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.6mm; align-content: start; }
+.cards { display: grid; gap: 1.6mm; align-content: start; }
+.card { background: #fff; border-radius: 4px; padding: 1.5mm 2mm 1.6mm; border-left: 3px solid var(--line); box-shadow: 0 0 0 .6px var(--line); font-size: 6.8pt; line-height: 1.3; break-inside: avoid; }
+.card.is-crit { border-left-color: var(--terra); }
+.card.cp { border-left-color: var(--ink); }
+.card .top { display: flex; justify-content: space-between; align-items: center; gap: 1mm; }
+.card .tt { font: 700 7.6pt/1.25 "Inter"; margin: .8mm 0 .6mm; }
+.card .val { color: var(--muted); }
+.card .who { font-size: 6pt; padding: 1.6px 4px; }
+.card .lvl { font-size: 5.6pt; padding: 1.6px 3.5px; }
+.drop { border: 1.5px dashed #cfc7b9; border-radius: 4px; padding: 3mm; color: var(--soft); font-size: 7pt; text-align: center; }
+.kb-rules { margin-top: auto; background: #fff; border-radius: 4px; padding: 2mm 2.2mm; font-size: 6.7pt; line-height: 1.35; color: var(--muted); box-shadow: 0 0 0 .6px var(--line); }
+.kb-rules strong { color: var(--ink); }

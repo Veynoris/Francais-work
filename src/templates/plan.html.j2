@@ -1,0 +1,384 @@
+{% extends "base.html.j2" %}
+{% import "macros.html.j2" as m with context %}
+{% block title %}G4 — Plan complet{% endblock %}
+{% block hl %}Plan complet · Les péripéties : les étapes de la transformation{% endblock %}
+{% block body %}
+{% set TOC = [
+  ('s1', 1, "L’essentiel en une page"),
+  ('s2', 2, "La consigne décortiquée"),
+  ('s3', 3, "Règles de frontière entre les rôles"),
+  ('s4', 4, "Le roman : repères et chronologie"),
+  ('s5', 5, "La scénette : trois épisodes candidats"),
+  ('s6', 6, "Répartition et charge de travail"),
+  ('s7', 7, "Feuille de route"),
+  ('s8', 8, "Organisation et communication"),
+  ('s9', 9, "Risques et contrôle qualité"),
+  ('s10', 10, "Checklist finale"),
+  ('s11', 11, "Plan d’action immédiat"),
+  ('s12', 12, "Questions ouvertes et hypothèses"),
+] %}
+
+{{ m.cover("Plan complet du projet", "Analyse, feuille de route, organisation et risques",
+   [("Œuvre", C.META.oeuvre ~ " — " ~ C.META.auteur), ("Calendrier", "Jour 1 → Jour 10, présentation au Jour J (J11)"),
+    ("Coordination", "Élève 5 — metteur en scène et rapporteur"), ("Groupe", None), ("Date du Jour J", None)]) }}
+
+<section>
+  <h1 class="sec first"><span class="num">§</span>Sommaire</h1>
+  {{ m.toc(TOC, toc_pages) }}
+  <div class="box teal" style="margin-top:8mm">
+    <div class="kicker">Comment lire ce document</div>
+    <p>Chaque exigence, tâche ou décision porte une étiquette de niveau. Les citations du roman ont toutes été vérifiées mot à mot dans le PDF fourni ; leurs références suivent le format <strong>partie-chapitre, page</strong> (ex. II-3, p.&nbsp;85).</p>
+    <p class="small muted">Les pages sont celles de Roman.pdf : elles ne correspondent pas à l’édition papier. L’Élève 1 les convertit au jour 10.</p>
+  </div>
+  {{ m.levels_legend() }}
+</section>
+
+{# ------------------------------------------------------------------ 1 #}
+<section>
+{{ m.sec('s1', 1, "L’essentiel en une page") }}
+<div class="box teal">
+  <div class="kicker">Question centrale du groupe</div>
+  <p class="question-centrale">{{ C.QUESTION_CENTRALE|fr }}</p>
+</div>
+<div class="grid3" style="grid-template-columns:repeat(4,1fr); margin-bottom:4mm">
+  <div class="box line"><div class="stat">12</div><div class="stat-l">étapes de transformation repérées dans le roman</div></div>
+  <div class="box line"><div class="stat">{{ C.QUOTES|length }}</div><div class="stat-l">citations de départ, vérifiées mot à mot</div></div>
+  <div class="box line"><div class="stat">10 + 1</div><div class="stat-l">jours de travail, puis le Jour J</div></div>
+  <div class="box line"><div class="stat">{{ "%.0f"|format(tot.values()|min) }}–{{ "%.1f"|format(tot.values()|max)|replace('.', ',') }} h</div><div class="stat-l">par élève, répétitions comprises (écart {{ "%.0f"|format(e_all) }}&nbsp;%)</div></div>
+</div>
+<h2>Ce que le groupe doit produire</h2>
+<table>
+  <thead><tr><th style="width:36%">Production</th><th>Responsable</th><th style="width:30%">Fondement</th><th class="c">Niveau</th></tr></thead>
+  <tbody>
+  <tr><td class="strong">Corpus de citations et chronologie</td><td>{{ m.who(1) }} {{ C.ELEVES[1].role }}</td><td>« Extraits précis et preuves textuelles »</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
+  <tr><td class="strong">A. Analyse linguistique (A1–A3)</td><td>{{ m.who(2) }} {{ C.ELEVES[2].role }}</td><td>Questions A1–A3 + production attendue</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
+  <tr><td class="strong">B. Analyse stylistique (B1–B3)</td><td>{{ m.who(3) }} {{ C.ELEVES[3].role }}</td><td>Questions B1–B3 + production attendue</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
+  <tr><td class="strong">C. Analyse thématique (C1–C4)</td><td>{{ m.who(4) }} {{ C.ELEVES[4].role }}</td><td>Questions C1–C4 + production attendue</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
+  <tr><td class="strong">D. Scénette en trois temps</td><td>{{ m.who(5) }} {{ C.ELEVES[5].role }}</td><td>Consigne D</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
+  <tr><td class="strong">Synthèse orale</td><td>{{ m.who(5) }} {{ C.ELEVES[5].role }}</td><td>Production attendue de l’Élève 5</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
+  <tr><td class="strong">Support visuel</td><td>{{ m.who(2) }} {{ m.who(3) }}</td><td>Non mentionné par la consigne</td><td class="c">{{ m.lvl('HYPO') }}</td></tr>
+  </tbody>
+</table>
+<h2>Cinq décisions structurantes</h2>
+<ol>
+  <li><strong>Un corpus commun en deux lots</strong> (jours 2 et 3), enrichi par les repérages des analystes : personne n’attend sans rien faire.</li>
+  <li><strong>Six règles de frontière</strong> entre les rôles, pour éviter les doublons A/B et les trous à l’oral.</li>
+  <li><strong>La thèse C4 dès le jour 5</strong> : elle devient le fil rouge de toutes les parties et de la synthèse.</li>
+  <li><strong>Deux points de contrôle avec plan de repli</strong> : validation du corpus (J3) et répétition générale (J9).</li>
+  <li><strong>Un épisode recommandé pour la scénette</strong> : l’affrontement avec le père (II-3), avec la première sortie (I-6) en repli.</li>
+</ol>
+</section>
+
+{# ------------------------------------------------------------------ 2 #}
+<section>
+{{ m.sec('s2', 2, "La consigne décortiquée") }}
+<p class="lead">La consigne est la source principale : en cas de conflit avec le plan initial, c’est elle qui l’emporte.</p>
+<blockquote class="verbatim keep">
+  <strong>{{ C.CONSIGNE.titre|fr }}</strong><br>
+  {{ C.CONSIGNE.intro|fr }}
+  <ul style="margin:1.4mm 0 0">{% for code, t in C.CONSIGNE.axes %}<li><span class="code">{{ code }}</span> {{ t|fr }}</li>{% endfor %}</ul>
+  <span class="src">Texte de la consigne, mot pour mot · les codes AX1–AX3 sont ajoutés pour le classement du corpus</span>
+</blockquote>
+<h2>Sous-questions et propriétaire unique</h2>
+<p class="small muted">{{ C.ATTRIBUTION_NOTE|fr }}</p>
+<table>
+  <thead><tr><th style="width:9mm">Code</th><th>Question (mot pour mot)</th><th style="width:30mm">Propriétaire</th><th class="c" style="width:21mm">Niveau</th></tr></thead>
+  <tbody>
+  {% for qid, txt, p in C.toutes_questions() %}
+  <tr><td><span class="code">{{ qid }}</span></td><td>{{ txt|fr }}</td><td>{{ m.who(p.eleve) }} {{ C.ELEVES[p.eleve].court }}</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="grid2 keep" style="margin-bottom:4mm">
+{% for who_, txt in C.ROLES_SANS_QUESTION %}
+  <div class="box"><div class="kicker">{{ who_ }} : rôle sans question propre</div><p class="small">{{ txt|fr }}</p></div>
+{% endfor %}
+</div>
+<h2>Rôles et productions attendues</h2>
+<table>
+  <thead><tr><th style="width:14mm">Élève</th><th>Responsabilité</th><th>Production attendue (consigne)</th></tr></thead>
+  <tbody>{% for n, e in C.ELEVES.items() %}<tr><td>{{ m.who(n) }}</td><td class="strong">{{ e.role|fr }}</td><td>{{ e.prod|fr }}</td></tr>{% endfor %}</tbody>
+</table>
+<h2>Exigences implicites</h2>
+<table>
+  <thead><tr><th class="c" style="width:24mm">Niveau</th><th>Exigence</th></tr></thead>
+  <tbody>{% for k, t in C.EXIGENCES_IMPLICITES %}<tr><td class="c">{{ m.lvl(k) }}</td><td>{{ t|fr }}</td></tr>{% endfor %}</tbody>
+</table>
+</section>
+
+{# ------------------------------------------------------------------ 3 #}
+<section>
+{{ m.sec('s3', 3, "Règles de frontière entre les rôles") }}
+<p class="lead">Là où deux rôles se touchent, une règle simple dit qui fait quoi. En cas de doute, appliquer le test.</p>
+{% for f in C.FRONTIERES %}
+<div class="box line keep">
+  <div class="kicker">Règle {{ loop.index }} · {{ f.zone|fr }}</div>
+  <p>{{ f.regle|fr }}</p>
+  <p class="small muted" style="margin:0"><strong>Test :</strong> {{ f.test|fr }}</p>
+</div>
+{% endfor %}
+</section>
+
+{# ------------------------------------------------------------------ 4 #}
+<section>
+{{ m.sec('s4', 4, "Le roman : repères et chronologie") }}
+<div class="box teal keep">
+  <div class="kicker">Repères vérifiés dans le texte</div>
+  <ul style="margin:0">{% for r in C.REPERES_ROMAN %}<li>{{ r|fr }}</li>{% endfor %}</ul>
+</div>
+<h2>Chronologie de la transformation en 12 étapes</h2>
+<p class="small muted">Repères factuels (ce qui se passe, où). Leur interprétation revient à l’Élève 4, leur complément en citations à l’Élève 1.</p>
+<ol class="chrono">
+{% for st in C.CHRONOLOGIE %}
+  {% if st.n == 1 %}<div class="part-banner">Partie I · « Être » · narrateur : le fils cadet</div>{% endif %}
+  {% if st.n == 8 %}<div class="part-banner">Partie II · « Avoir » · narrateur : Nagib</div>{% endif %}
+  <li class="part-{{ st.loc[0] }}">
+    <div class="dot">{{ st.n }}</div>
+    <div>
+      <div class="head"><strong>{{ st.titre|fr }}</strong><span class="ref">{{ loc_str(st.loc, st.get('loc2')) }}, p.&nbsp;{{ st.pages }}</span><span class="code">{{ st.axe }}</span></div>
+      <div class="small">{{ st.fait|fr }}</div>
+      <ul class="quotes">{% for qid in st.q %}<li>{{ m.q(qid) }}</li>{% endfor %}</ul>
+    </div>
+  </li>
+{% endfor %}
+</ol>
+</section>
+
+{# ------------------------------------------------------------------ 5 #}
+<section>
+{{ m.sec('s5', 5, "La scénette : trois épisodes candidats") }}
+<p class="lead">Chaque épisode est testé sur les trois temps exigés par la consigne. Le choix final appartient au groupe (vote à l’étape S05).</p>
+{% for ep in C.EPISODES %}
+<div class="episode">
+  <div class="eh"><span class="t">{{ ep.id }} · {{ ep.titre|fr }}</span><span class="ref">{{ loc_str(ep.loc) }}, p.&nbsp;{{ ep.pages }}</span></div>
+  <div class="eb">
+    <div class="three">
+      <div><div class="lab">Situation initiale</div>{{ ep.si[0]|fr }}{{ m.q(ep.si[1]) }}</div>
+      <div><div class="lab">Changement</div>{{ ep.chg[0]|fr }}{{ m.q(ep.chg[1]) }}</div>
+      <div><div class="lab">Conséquence</div>{{ ep.csq[0]|fr }}{{ m.q(ep.csq[1]) }}</div>
+    </div>
+    <div class="small"><strong>Rôles :</strong> {{ ep.roles|fr }}<br><strong>Atouts :</strong> {{ ep.atouts|fr }}<br><strong>Limites :</strong> {{ ep.limites|fr }}</div>
+    <div class="small" style="margin-top:1.4mm">Verdict : <span class="verdict{% if ep.id == 'EP-B' %} top{% endif %}">{{ ep.reco|fr }}</span></div>
+  </div>
+</div>
+{% endfor %}
+<h2>Grille de comparaison</h2>
+<table class="keep">
+  <thead><tr><th>Critère (0 à 3)</th>{% for ep in C.EPISODES %}<th class="c">{{ ep.id }}</th>{% endfor %}</tr></thead>
+  <tbody>
+  {% for crit in C.CRITERES_EPISODE %}{% set i = loop.index0 %}
+  <tr><td>{{ crit|fr }}</td>{% for ep in C.EPISODES %}<td class="c"><span class="score">{% for k in range(3) %}<i class="{{ 'on' if k < ep.score[i] }}"></i>{% endfor %}</span> {{ ep.score[i] }}</td>{% endfor %}</tr>
+  {% endfor %}
+  <tr class="total"><td>Total sur 12</td>{% for ep in C.EPISODES %}<td class="c">{{ ep.score|sum }}</td>{% endfor %}</tr>
+  </tbody>
+</table>
+<div class="box saffron keep"><div class="kicker">Épisode écarté</div><p><strong>{{ C.EPISODE_ECARTE[0]|fr }}</strong> : {{ C.EPISODE_ECARTE[1]|fr }}</p></div>
+</section>
+
+{# ------------------------------------------------------------------ 6 #}
+<section>
+{{ m.sec('s6', 6, "Répartition et charge de travail") }}
+<h2 style="margin-top:0">Tableau de répartition</h2>
+<table>
+  <thead><tr><th style="width:11mm">Élève</th><th style="width:62mm">Rôle et mission</th><th style="width:20mm">Possède</th><th>Étapes principales (≥ 1 h 30)</th><th class="r" style="width:14mm">Charge</th></tr></thead>
+  <tbody>
+  {% for n, mm in C.MEMBRES.items() %}
+  <tr><td>{{ m.who(n) }}</td><td><strong>{{ C.ELEVES[n].role|fr }}</strong><br><span class="small muted">{{ mm.mission[0]|fr }}</span></td>
+      <td>{% if mm.possede %}{% for q_ in mm.possede %}<span class="code">{{ q_ }}</span> {% endfor %}{% else %}<span class="small">Corpus, axes AX1–AX3</span>{% endif %}{% if n == 5 %}<br><span class="small">+ synthèse orale</span>{% endif %}</td>
+      <td class="small">{% for s in C.ETAPES if s.h.get(n, 0) >= 1.5 %}<div style="padding:.3mm 0"><span class="code">{{ s.code }}</span> {{ s.titre|fr }}</div>{% endfor %}</td>
+      <td class="r strong">{{ tot[n]|h }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="keep">
+<h2>Charge recalculée et profil dans le temps</h2>
+<p class="small muted">Heures = somme des étapes de la feuille de route (réunions et répétitions comprises). La lecture complète du roman, supposée déjà faite en classe, n’est pas comptée.</p>
+<table class="keep">
+  <thead><tr><th>Élève</th>{% for p in periodes %}<th class="r">{{ p }}</th>{% endfor %}<th class="r">Total</th><th class="r">dont {{ m.lvl('HYPO') }}</th><th class="r">Plan initial*</th></tr></thead>
+  <tbody>
+  {% for n in C.ELEVES %}
+  <tr><td>{{ m.who(n) }} {{ C.ELEVES[n].court }}</td>{% for p in periodes %}<td class="r">{{ ((per[n][p] * 2)|round / 2)|h }}</td>{% endfor %}<td class="r strong">{{ tot[n]|h }}</td><td class="r">{{ hypo[n]|h if hypo[n] else '—' }}</td><td class="r muted">{{ C.PLAN_INITIAL_CHARGE[n]|h }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<p class="small">Écart entre la charge la plus forte et la plus faible : <strong>{{ "%.1f"|format(e_all)|replace('.', ',') }}&nbsp;%</strong> ({{ "%.1f"|format(e_sans)|replace('.', ',') }}&nbsp;% si le support visuel n’est pas demandé), sous le seuil de 20&nbsp;%. <span class="muted">* Le plan initial annonçait ces heures hors 2&nbsp;h de répétitions, sans compter réunions ni relectures.</span></p>
+<div class="box keep">
+  <div class="kicker">Lecture du profil</div>
+  <p class="small">L’Élève 1 travaille surtout en début de projet (corpus) et l’Élève 5 en fin de projet (script, synthèse, répétitions). La vérification des citations et la relecture du script maintiennent l’Élève 1 actif au milieu du projet ; le cadrage et le choix de l’épisode occupent l’Élève 5 dès les jours 1 à 4.</p>
+</div>
+<h2>Doublures</h2>
+<p class="small muted">Chaque élève connaît assez la partie de sa doublure pour la présenter en cas d’absence.</p>
+<table class="keep">
+  <thead><tr><th>Titulaire</th><th>Doublure</th><th>Ce que la doublure doit pouvoir faire</th></tr></thead>
+  <tbody>
+  {% for a, b in C.DOUBLURES %}
+  <tr><td>{{ m.who(a) }} {{ C.ELEVES[a].court }}</td><td>{{ m.who(b) }} {{ C.ELEVES[b].court }}</td><td class="small">{% if a == 5 %}Présenter la synthèse et tenir un rôle de la scénette{% elif a == 1 %}Présenter la chronologie et répondre sur une citation{% else %}Présenter la fiche {{ 'ABC'[a-2] }} à partir de la V2{% endif %}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</section>
+
+{# ------------------------------------------------------------------ 7 #}
+<section>
+{{ m.sec('s7', 7, "Feuille de route") }}
+<p class="lead">Calendrier relatif : la date limite n’est pas encore connue. Dès qu’elle l’est, on remplace J11 par la date du Jour J et on remonte jour par jour. Le jour 10 reste un tampon.</p>
+<h2 style="margin-top:0">Chemin critique</h2>
+<div class="path">{% for c_ in C.CHEMIN_CRITIQUE %}<span class="n">{{ c_ }}</span>{% if not loop.last %}<span class="a">→</span>{% endif %}{% endfor %}</div>
+<p class="small muted">Un retard sur ces étapes repousse le Jour J. S05 et S09 (épisode, script) ont un jour de marge ; S03 et S13 ne sont pas critiques.</p>
+<h2>Étapes</h2>
+{% for s in C.ETAPES %}
+<div class="step{% if s.critique %} is-crit{% endif %}{% if s.get('checkpoint') %} cp{% endif %}">
+  <div class="side"><span class="c">{{ s.code }}</span><span class="d">{{ m.days(s) }}</span>{% if s.critique %}<span class="crit-flag">◆ critique</span>{% endif %}</div>
+  <div class="main">
+    <div class="title"><strong>{{ s.titre|fr }}</strong><span>{{ m.lvl(s.niveau) }}</span></div>
+    <div class="kv">
+      <div class="k">Qui</div><div>{{ m.owners(s) }}</div>
+      <div class="k">Prérequis</div><div>{% for p in s.prereq %}<span class="code">{{ p }}</span> {% else %}—{% endfor %}</div>
+      <div class="k">Actions</div><div class="wide"><ul style="margin:0">{% for a in s.actions %}<li>{{ a|fr }}</li>{% endfor %}</ul></div>
+      <div class="k">Livrable</div><div>{{ s.livrable|fr }}</div>
+      <div class="k">Débloque</div><div>{% for p in s.debloque %}<span class="code">{{ p }}</span> {% else %}—{% endfor %}</div>
+      <div class="k">Validé si</div><div class="wide">{{ s.validation|fr }}</div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<h2>Points de contrôle</h2>
+<div class="grid2">
+{% for k, cp in C.CHECKPOINTS.items() %}
+  <div class="box {{ 'teal' if k == 'CP1' else 'terra' }}">
+    <div class="kicker">{{ k }} · {{ cp.quand|fr }}</div>
+    <h3>{{ etapes[k].titre|fr }}</h3>
+    <p class="small"><strong>Réussi si :</strong> {{ cp.reussite|fr }}</p>
+    <p class="small" style="margin-bottom:1mm"><strong>Si le point de contrôle échoue :</strong></p>
+    <ul class="small" style="margin:0">{% for x in cp.echec %}<li>{{ x|fr }}</li>{% endfor %}</ul>
+  </div>
+{% endfor %}
+</div>
+
+<div class="keep">
+<h2>Vue d’ensemble (Gantt)</h2>
+<p class="small muted">Une ligne par élève, une colonne par jour. Les étapes cerclées de rouge sont sur le chemin critique ; les étapes en pointillés jaunes sont conditionnelles (HYPOTHÈSE).</p>
+<table class="gantt">
+  <thead><tr><th class="first">Élève</th>{% for d in range(1, 12) %}<th class="{{ 'jj' if d == 11 }}">{{ 'J' ~ d if d < 11 else 'Jour J' }}</th>{% endfor %}<th class="tot">Total</th></tr></thead>
+  <tbody>
+  {% for n in C.ELEVES %}
+  <tr><td class="first">{{ m.who(n) }}<br><span class="small muted">{{ C.ELEVES[n].court }}</span></td>
+    {% for d in range(1, 12) %}<td class="{{ 'jj' if d == 11 }}">{% for s in gantt[n][d] %}<span class="chip c{{ n }}{% if s.critique %} is-crit{% endif %}{% if s.niveau == 'HYPO' %} hypo{% endif %}">{{ 'Oral' if s.code == 'JJ' else s.code }}</span>{% endfor %}</td>{% endfor %}
+    <td class="r strong">{{ tot[n]|h }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<table class="small zebra keep">
+  <thead><tr><th style="width:12mm">Code</th><th>Étape</th><th style="width:20mm">Jours</th><th style="width:12mm">Code</th><th>Étape</th><th style="width:20mm">Jours</th></tr></thead>
+  <tbody>
+  {% set half = (C.ETAPES|length + 1) // 2 %}
+  {% for i in range(half) %}{% set a_ = C.ETAPES[i] %}{% set b_ = C.ETAPES[i + half] if i + half < C.ETAPES|length else None %}
+  <tr><td><span class="code">{{ a_.code }}</span></td><td>{{ a_.titre|fr }}</td><td>{{ m.days(a_) }}</td>
+      {% if b_ %}<td><span class="code">{{ b_.code }}</span></td><td>{{ b_.titre|fr }}</td><td>{{ m.days(b_) }}</td>{% else %}<td></td><td></td><td></td>{% endif %}</tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h2>Budget de l’oral <span class="tag">{{ m.lvl('HYPO') }}</span></h2>
+<table class="keep">
+  <thead><tr><th>Partie (ordre de passage)</th><th>Qui</th><th class="r">Durée</th></tr></thead>
+  <tbody>
+  {% for a, b, d in C.BUDGET_ORAL.lignes %}<tr><td>{{ loop.index }}. {{ a|fr }}</td><td>{{ m.who(b) }} {{ C.ELEVES[b].court }}</td><td class="r">{{ d|fr }}</td></tr>{% endfor %}
+  <tr class="total"><td>Total visé</td><td></td><td class="r">{{ C.BUDGET_ORAL.total|fr }}</td></tr>
+  </tbody>
+</table>
+<p class="small muted">{{ C.BUDGET_ORAL.note|fr }}</p>
+</section>
+
+{# ------------------------------------------------------------------ 8 #}
+<section>
+{{ m.sec('s8', 8, "Organisation et communication") }}
+<h2 style="margin-top:0">Outils</h2>
+<table><thead><tr><th style="width:34mm">Outil</th><th>Usage</th></tr></thead>
+<tbody>{% for a, b in C.ORGANISATION.outils %}<tr><td class="strong">{{ a|fr }}</td><td>{{ b|fr }}</td></tr>{% endfor %}</tbody></table>
+<div class="box teal keep"><div class="kicker">Nommage des fichiers</div><p style="margin:0">{{ C.ORGANISATION.nommage|fr }}</p></div>
+<div class="grid2">
+  <div><h2 style="margin-top:0">Rythme</h2>
+    <table><tbody>{% for a, b in C.ORGANISATION.rythme %}<tr><td class="strong" style="width:30mm">{{ a|fr }}</td><td>{{ b|fr }}</td></tr>{% endfor %}</tbody></table></div>
+  <div><h2 style="margin-top:0">Règles du groupe</h2>
+    <table><tbody>{% for a, b in C.ORGANISATION.regles %}<tr><td class="strong" style="width:22mm">{{ a|fr }}</td><td>{{ b|fr }}</td></tr>{% endfor %}</tbody></table></div>
+</div>
+<h2>Suivi visuel</h2>
+<p>Le tableau Kanban (G4_Tableau_Suivi.pdf) est pré-rempli avec une carte par étape. Chaque élève déplace ses cartes : <strong>À faire → En cours → À vérifier → Terminé</strong>. Une carte passe en « Terminé » seulement quand son critère de validation est rempli et vérifié par une autre personne que l’auteur.</p>
+<div class="keep">
+<h2>Modèle de compte rendu</h2>
+<div class="box line keep" style="display:grid;grid-template-columns:1fr 1fr;column-gap:8mm;padding-top:1mm">
+{% for f in C.ORGANISATION.compte_rendu %}<div class="field" style="grid-template-columns:40mm 1fr;padding-top:1.6mm"><div class="k small">{{ f|fr }}</div><div class="v" style="height:6mm"></div></div>{% endfor %}
+</div>
+</div>
+</section>
+
+{# ------------------------------------------------------------------ 9 #}
+<section>
+{{ m.sec('s9', 9, "Risques et contrôle qualité") }}
+<p class="lead">Probabilité et impact sont des estimations qualitatives (faible, moyenne ou forte). Le « responsable » surveille le risque, sans être forcément celui qui le provoque.</p>
+<table class="zebra">
+  <thead><tr><th style="width:30mm">Risque et cause</th><th style="width:24mm">Conséquence</th><th class="c" style="width:16mm">Proba. / impact</th><th>Prévention</th><th>Correction</th><th class="c" style="width:10mm">Resp.</th></tr></thead>
+  <tbody>
+  {% for r in C.RISQUES %}
+  <tr><td><strong>{{ r[0]|fr }}</strong><br><span class="small muted">{{ r[1]|fr }}</span></td><td>{{ r[2]|fr }}</td>
+      <td class="c small"><span class="{{ 'crit' if r[3] == 'Forte' }}">{{ r[3] }}</span><br><span class="{{ 'crit' if r[4] == 'Fort' }}">{{ r[4] }}</span></td>
+      <td>{{ r[5]|fr }}</td><td>{{ r[6]|fr }}</td><td class="c">{{ m.who(r[7]) }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<h2>Qui contrôle quoi</h2>
+<table class="keep">
+  <thead><tr><th>Contrôle</th><th>Contrôleur</th><th>Quand</th></tr></thead>
+  <tbody>
+  <tr><td>Exactitude de toutes les citations</td><td>{{ m.who(1) }}</td><td>S10 (J6–J7), puis S15 (J10)</td></tr>
+  <tr><td>Fiche A (relue par un autre analyste)</td><td>{{ m.who(4) }}</td><td>S11 (J7)</td></tr>
+  <tr><td>Fiche B</td><td>{{ m.who(2) }}</td><td>S11 (J7)</td></tr>
+  <tr><td>Fiche C</td><td>{{ m.who(3) }}</td><td>S11 (J7)</td></tr>
+  <tr><td>Fidélité du script au texte</td><td>{{ m.who(1) }}</td><td>S11 (J8)</td></tr>
+  <tr><td>Thèse C4 dans la synthèse</td><td>{{ m.who(4) }}</td><td>S12 (J8)</td></tr>
+  <tr><td>Temps, ordre, transitions</td><td>{{ m.who(5) }}</td><td>CP2 (J9)</td></tr>
+  <tr><td>Cohérence de fond entre les parties</td><td>{{ m.who(4) }}</td><td>S15 (J10)</td></tr>
+  </tbody>
+</table>
+</section>
+
+{# ------------------------------------------------------------------ 10 #}
+<section>
+{{ m.sec('s10', 10, "Checklist finale") }}
+<p class="lead">À cocher au jour 10 par l’Élève 5, avec l’Élève 1 (citations) et l’Élève 4 (cohérence).</p>
+<ul class="checks">
+{% for k, t in C.CHECKLIST_FINALE %}<li><span class="bx"></span><span>{{ t|fr }}</span><span>{{ m.lvl(k) }}</span></li>{% endfor %}
+</ul>
+
+<div style="height:6mm"></div>
+{{ m.sec('s11', 11, "Plan d’action immédiat", first=True) }}
+<p class="lead">Ce qu’il faut faire dès aujourd’hui pour lancer le projet sans attendre.</p>
+<table>
+  <thead><tr><th style="width:8mm">#</th><th style="width:22mm">Qui</th><th style="width:26mm">Échéance</th><th>Action</th></tr></thead>
+  <tbody>
+  {% for who_, quand, quoi in C.ACTIONS_IMMEDIATES %}
+  <tr><td class="strong">{{ loop.index }}</td><td>{% if who_ is number %}{{ m.who(who_) }}{% elif who_ == 'Tous' %}{{ m.who('all') }}{% else %}{% for x in who_.split(', ') %}{{ m.who(x|int) }}{% endfor %}{% endif %}</td><td class="nobr">{{ quand|fr }}</td><td>{{ quoi|fr }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</section>
+
+{# ------------------------------------------------------------------ 12 #}
+<section>
+{{ m.sec('s12', 12, "Questions ouvertes et hypothèses") }}
+<h2 style="margin-top:0">Questions à poser au professeur dès le jour 1</h2>
+<table>
+  <thead><tr><th style="width:8mm">#</th><th style="width:28mm">Sujet</th><th>Question</th><th style="width:28mm">Réponse</th></tr></thead>
+  <tbody>{% for a, b in C.QUESTIONS_PROF %}<tr><td class="strong">{{ loop.index }}</td><td class="strong">{{ a|fr }}</td><td>{{ b|fr }}</td><td></td></tr>{% endfor %}</tbody>
+</table>
+<h2>Hypothèses de travail <span class="tag">{{ m.lvl('HYPO') }}</span></h2>
+<p class="small muted">Ce plan repose sur ces hypothèses tant qu’elles ne sont pas confirmées. Si l’une tombe, l’Élève 5 met à jour le calendrier et prévient le groupe.</p>
+<ul class="checks">
+{% for h_ in C.HYPOTHESES %}<li><span class="bx"></span><span>{{ h_|fr }}</span><span class="small muted">confirmée ?</span></li>{% endfor %}
+</ul>
+</section>
+{% endblock %}

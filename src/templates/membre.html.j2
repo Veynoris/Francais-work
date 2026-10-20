@@ -1,0 +1,302 @@
+{% extends "base.html.j2" %}
+{% import "macros.html.j2" as m with context %}
+{% block title %}G4 — Élève {{ n }}{% endblock %}
+{% block hl %}Dossier de travail · Élève {{ n }} · {{ e.role }}{% endblock %}
+{% block body %}
+{% set doublure = (C.DOUBLURES|selectattr(0, 'equalto', n)|first)[1] %}
+{% set qtxt = {} %}{% for qid, txt, p in C.toutes_questions() %}{% set _ = qtxt.update({qid: txt}) %}{% endfor %}
+{% set TOC = [
+  ('m1', 1, "Ta mission"),
+  ('m2', 2, "Ce qui t’appartient"),
+  ('m3', 3, "Fiche méthode"),
+  ('m4', 4, "Entrées et sorties"),
+  ('m5', 5, "Définition de « terminé »"),
+  ('m6', 6, "Ton calendrier"),
+  ('m7', 7, "Règles communes et compte rendu"),
+] %}
+
+<section class="cover">
+  <div class="band">
+    {{ m.zellige() }}
+    <div class="inner">
+      <div class="eyebrow">{{ C.META.groupe }} · Dossier de travail individuel</div>
+      <h1>{{ C.META.titre|fr }}</h1>
+      <div class="sub">Étude de <em>{{ C.META.oeuvre }}</em> — {{ C.META.auteur }}</div>
+    </div>
+  </div>
+  <div class="doc" style="top:138mm">
+    <div class="doctype"><span class="who who-{{ n }}" style="font-size:12pt;padding:5px 11px;border-radius:13px;vertical-align:4px">Élève {{ n }}</span>&ensp;{{ e.role|fr }}</div>
+    <div class="accent"></div>
+    <div class="meta">
+      <div class="k">Nom</div><div class="fill"></div>
+      <div class="k">Production attendue</div><div>{{ e.prod|fr }}</div>
+      <div class="k">Charge estimée</div><div>{{ tot[n]|h }} sur 10 jours, répétitions comprises</div>
+      <div class="k">Doublure</div><div>Élève {{ doublure }} ({{ C.ELEVES[doublure].court|fr }})</div>
+    </div>
+    <div style="margin-top:8mm; max-width:170mm">
+      <div class="kicker">Dans ce dossier</div>
+      <div class="grid2" style="gap:0 8mm">
+      {% for col in TOC|slice(2) %}
+        <ol class="toc" style="margin:0">
+        {% for key, num, title in col %}<li style="padding:1.7mm 0;font-size:9pt"><span class="n">{{ num }}</span><span class="t">{{ title|fr }}</span><span class="p">{{ toc_pages.get(key, '··') }}</span></li>{% endfor %}
+        </ol>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>{{ C.META.version }} · {{ C.META.date }}</span><span>Ce dossier se suffit à lui-même ; le plan complet donne la vue d’ensemble.</span></div>
+</section>
+
+{# ------------------------------------------------------------------ 1 #}
+<section>
+{{ m.sec('m1', 1, "Ta mission", first=True) }}
+<div class="box teal">
+  <div class="kicker">En trois lignes</div>
+  <ol style="margin:0">{% for x in mb.mission %}<li>{{ x|fr }}</li>{% endfor %}</ol>
+</div>
+<div class="box terra">
+  <div class="kicker">Pourquoi c’est important pour le résultat final</div>
+  <p style="margin:0">{{ mb.pourquoi|fr }}</p>
+</div>
+<div class="box line keep">
+  <div class="kicker">Repères sur le roman, valables pour tout le groupe</div>
+  <ul style="margin:0" class="small">{% for r in C.REPERES_ROMAN %}<li>{{ r|fr }}</li>{% endfor %}</ul>
+</div>
+
+{{ m.sec('m2', 2, "Ce qui t’appartient", first=True) }}
+{% if mb.get('possede_axes') %}
+<p>Aucune question A–D ne t’appartient : ta production attendue est le socle de toutes les autres. Ce sont les <strong>trois axes</strong> de la consigne qui t’appartiennent : ils servent de colonnes de classement à ton corpus.</p>
+<blockquote class="verbatim keep">
+  {{ C.CONSIGNE.intro|fr }}
+  <ul style="margin:1.4mm 0 0">{% for code, t in C.CONSIGNE.axes %}<li><span class="code">{{ code }}</span> {{ t|fr }}</li>{% endfor %}</ul>
+  <span class="src">Consigne, mot pour mot · production attendue : « {{ e.prod|fr }} »</span>
+</blockquote>
+{% else %}
+<p>{% if n == 5 %}Tu possèdes la partie D, recopiée mot pour mot ci-dessous, ainsi que la synthèse orale (production attendue).{% else %}Ces questions sont recopiées mot pour mot depuis la consigne. Toi seul en es responsable ; les autres peuvent t’aider, mais la réponse finale est la tienne.{% endif %}</p>
+{% for qid in mb.possede %}
+<blockquote class="verbatim keep"><span class="code">{{ qid }}</span>&ensp;{{ qtxt[qid]|fr }}</blockquote>
+{% endfor %}
+<p class="small muted">Production attendue (consigne) : « {{ e.prod|fr }} »</p>
+{% endif %}
+<h2>Tes frontières avec les autres rôles</h2>
+<ul>{% for x in mb.frontieres %}<li>{{ x|fr }}</li>{% endfor %}</ul>
+</section>
+
+{# ------------------------------------------------------------------ 3 #}
+<section>
+{{ m.sec('m3', 3, "Fiche méthode") }}
+<p class="lead">{{ fm.titre|fr }}. Les cases sont vides : la fiche donne le cadre, c’est toi qui apportes les réponses.</p>
+
+{% if n == 1 %}
+<h2 style="margin-top:0">Méthode en six règles</h2>
+<ol>{% for x in fm.etapes %}<li>{{ x|fr }}</li>{% endfor %}</ol>
+<h2>Chronologie de référence à vérifier</h2>
+<p class="small muted">Squelette établi à partir du texte (étapes et chapitres). Vérifie chaque ligne, puis inscris les n° des citations de ton corpus.</p>
+<table>
+  <thead><tr><th>Étape</th><th style="width:30mm">Partie-chapitre, pages</th><th class="c" style="width:16mm">Axe proposé</th><th style="width:32mm">Citations n°</th><th class="c" style="width:16mm">Vérifiée</th></tr></thead>
+  <tbody>
+  {% for st in C.CHRONOLOGIE %}
+  {% if st.n == 1 %}<tr><td colspan="5" class="small muted" style="background:#fbf9f5">Partie I · « Être » · narrateur : le fils cadet</td></tr>{% endif %}
+  {% if st.n == 8 %}<tr><td colspan="5" class="small muted" style="background:#fbf9f5">Partie II · « Avoir » · narrateur : Nagib</td></tr>{% endif %}
+  <tr><td><strong>{{ st.n }}.</strong> {{ st.titre|fr }}</td><td>{{ loc_str(st.loc, st.get('loc2')) }}, p.&nbsp;{{ st.pages }}</td><td class="c"><span class="code">{{ st.axe }}</span></td><td></td><td class="c"><span class="bx" style="display:inline-block;width:4mm;height:4mm;border:1.4px solid #1d2433;border-radius:1.2mm"></span></td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<h2 style="break-before:page;margin-top:0">Tableau des citations</h2>
+<p class="small muted">À recopier dans le fichier partagé G4_Corpus_E1_V1 ; cette page sert de brouillon ou de modèle. Objectif : 25 à 35 lignes.</p>
+<table class="blank">
+  <thead><tr><th style="width:9mm">N°</th><th>Citation (mot à mot)</th><th style="width:24mm">Partie-ch. / page</th><th style="width:13mm">Étape</th><th style="width:12mm">Axe</th><th style="width:19mm">Utilisée par</th></tr></thead>
+  <tbody>{% for i in range(fm.lignes) %}<tr><td class="small muted">{{ i + 1 }}</td><td></td><td></td><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+<div class="keep">
+<h2>Rapport de vérification (étape S10)</h2>
+<table class="blank">
+  <thead><tr>{% for c_ in fm.verif_colonnes %}<th>{{ c_ }}</th>{% endfor %}</tr></thead>
+  <tbody>{% for i in range(6) %}<tr><td style="width:12mm"></td><td></td><td style="width:20mm"></td><td></td></tr>{% endfor %}</tbody>
+</table>
+<p class="small muted">Continue le rapport dans le fichier partagé G4_Verif_E1_V1 si besoin.</p>
+</div>
+
+{% elif n == 2 %}
+<div class="box line keep"><p class="small" style="margin:0"><strong>La règle d’or :</strong> un relevé sans analyse ni effet ne compte pas. Pour chaque ligne : je cite (n° du corpus) → j’observe un fait de langue → je dis ce que ce fait montre de la transformation de la mère.</p></div>
+{% for r, aide in fm.rubriques %}
+<div class="keep">
+<h3>{{ r|fr }}</h3>
+<p class="small muted">{{ aide|fr }}</p>
+<table class="blank tall">
+  <thead><tr>{% for c_ in fm.colonnes %}<th style="width:33%">{{ c_|fr }}</th>{% endfor %}</tr></thead>
+  <tbody>{% for i in range(fm.lignes_par_rubrique) %}<tr><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+{% endfor %}
+
+{% elif n == 3 %}
+<div class="box line keep"><p class="small" style="margin:0"><strong>La règle d’or :</strong> nommer un procédé ne suffit pas. Pour chaque ligne : procédé → citation (n° du corpus) → effet sur le lecteur et sur l’image de la mère.</p></div>
+<h2 style="margin-top:2mm">B1 · Procédés</h2>
+<table class="blank">
+  <thead><tr><th style="width:52mm">Procédé et repère</th><th>Citation (n° du corpus)</th><th>Effet produit</th></tr></thead>
+  <tbody>{% for a, b in fm.procedes %}<tr><td class="lbl"><span style="color:#1d2433">{{ a|fr }}</span><br><span class="small" style="font-weight:400">{{ b|fr }}</span></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+<div class="keep">
+<h2>B2 · Humour, ironie, décalage</h2>
+<table class="blank tall">
+  <thead><tr><th style="width:44mm">Type</th><th>Citation (n°)</th><th>Effet : que fait voir ce rire ?</th></tr></thead>
+  <tbody>{% for x in fm.b2 %}<tr><td class="lbl">{{ x|fr }}</td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+<div class="keep">
+<h2>B3 · Regard du narrateur</h2>
+<table class="blank tall">
+  <thead><tr><th style="width:44mm">Narrateur</th><th>Marques du regard (citation n°)</th><th>Valorise ou interroge l’évolution ?</th></tr></thead>
+  <tbody>{% for x in fm.b3 %}<tr><td class="lbl">{{ x|fr }}</td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+
+{% elif n == 4 %}
+<h2 style="margin-top:0">Structure de chaque réponse</h2>
+<table>
+  <thead><tr><th style="width:38mm">Bloc</th><th>Ce qu’il contient</th></tr></thead>
+  <tbody>{% for a, b in fm.structure %}<tr><td class="strong">{{ a|fr }}</td><td>{{ b|fr }}</td></tr>{% endfor %}</tbody>
+</table>
+<div class="keep">
+<h2>C1 · Étapes de l’émancipation</h2>
+<p class="small muted">Appuie-toi sur la chronologie de l’Élève 1 ; regroupe les étapes en grandes phases et nomme-les.</p>
+<table class="blank">
+  <thead><tr>{% for c_ in fm.c1_colonnes %}<th>{{ c_|fr }}</th>{% endfor %}</tr></thead>
+  <tbody>{% for i in range(5) %}<tr><td style="width:22mm"></td><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+<div class="keep">
+<h2>C2 · Obstacles, résistances, contradictions</h2>
+<table class="blank">
+  <thead><tr><th>Obstacle ou contradiction</th><th style="width:30mm">Extérieur / intérieur</th><th style="width:30mm">Citation (n°)</th><th>Ce qu’il révèle</th></tr></thead>
+  <tbody>{% for i in range(4) %}<tr><td></td><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+<div class="keep">
+<h2>C3 · Rapports familiaux</h2>
+<table class="blank">
+  <thead><tr><th style="width:36mm">Relation</th><th>Avant</th><th>Après</th><th style="width:28mm">Preuve (n°)</th></tr></thead>
+  <tbody>{% for r_ in ["La mère et le père", "La mère et Nagib", "La mère et le fils cadet", "La mère et les autres (amies, société)"] %}<tr><td class="lbl">{{ r_|fr }}</td><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+<div class="keep">
+<h2>C4 · Savoir ou identité ?</h2>
+<p class="small muted">Trois positions défendables. Choisis-en une, prouve-la et nuance-la.</p>
+<div class="grid3" style="margin-bottom:3mm">{% for a, b in fm.c4_positions %}<div class="box line"><div class="kicker">{{ a|fr }}</div><p class="small" style="margin:0">{{ b|fr }}</p></div>{% endfor %}</div>
+<div class="box terra" style="padding-bottom:2mm">
+  <div class="kicker">Notre thèse en une phrase (à envoyer au jour 5)</div>
+  <div class="ruled">{% for i in range(3) %}<div></div>{% endfor %}</div>
+</div>
+</div>
+<div class="keep">
+<h2>Enjeux sociaux et philosophiques</h2>
+<table class="blank">
+  <thead><tr><th style="width:52mm">Enjeu</th><th>Ce que le roman en dit</th><th style="width:28mm">Preuve (n°)</th></tr></thead>
+  <tbody>{% for x in fm.enjeux %}<tr><td class="lbl">{{ x|fr }}</td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+
+{% elif n == 5 %}
+<h2 style="margin-top:0">Les trois épisodes candidats</h2>
+<p class="small muted">Analysés dans le plan complet (section 5) : chaque épisode y est testé sur les trois temps, avec ses citations. Recommandation : EP-B, avec EP-A en repli.</p>
+<table>
+  <thead><tr><th style="width:14mm">Id</th><th>Épisode</th><th style="width:26mm">Réf.</th><th>Verdict</th><th class="c" style="width:16mm">Note /12</th></tr></thead>
+  <tbody>{% for ep in C.EPISODES %}<tr><td><span class="code">{{ ep.id }}</span></td><td class="strong">{{ ep.titre|fr }}</td><td>{{ loc_str(ep.loc) }}, p.&nbsp;{{ ep.pages }}</td><td>{{ ep.reco|fr }}</td><td class="c">{{ ep.score|sum }}</td></tr>{% endfor %}</tbody>
+</table>
+<h2>Fiche du script</h2>
+<table class="blank">
+  <tbody>{% for x in fm.script_entete %}<tr><td class="lbl" style="width:52mm">{{ x|fr }}</td><td></td></tr>{% endfor %}</tbody>
+</table>
+{% for t, aide in fm.temps %}
+<div class="keep">
+<h3>{{ t|fr }}</h3>
+<p class="small muted">{{ aide|fr }}</p>
+<table class="blank tall">
+  <thead><tr><th style="width:16mm">{{ fm.temps_colonnes[0] }}</th><th>{{ fm.temps_colonnes[1]|fr }}</th><th>{{ fm.temps_colonnes[2]|fr }}</th></tr></thead>
+  <tbody>{% for i in range(3) %}<tr><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+{% endfor %}
+<div class="keep">
+<h2>Distribution des rôles</h2>
+<table class="blank">
+  <thead><tr><th>Rôle</th><th>Interprète</th><th>Doublure</th><th>Accessoire</th></tr></thead>
+  <tbody>{% for i in range(5) %}<tr><td></td><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+<div class="keep">
+<h2>Plan de répétition</h2>
+<table>
+  <thead><tr><th style="width:40mm">Répétition</th><th style="width:32mm">Quand</th><th>Contenu</th><th style="width:22mm">Durée réelle</th></tr></thead>
+  <tbody>{% for a, b, c_ in fm.repetitions %}<tr><td class="strong">{{ a|fr }}</td><td>{{ b|fr }}</td><td>{{ c_|fr }}</td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+<div class="keep">
+<h2>Plan de la synthèse orale</h2>
+<table class="blank">
+  <thead><tr><th style="width:8mm">#</th><th style="width:58mm">Bloc</th><th>Ta phrase</th></tr></thead>
+  <tbody>{% for a, b in fm.synthese %}<tr><td class="small muted">{{ loop.index }}</td><td class="lbl"><span style="color:#1d2433">{{ a|fr }}</span><br><span class="small" style="font-weight:400">{{ b|fr }}</span></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+<div class="keep">
+<h2>Conducteur de l’oral <span class="tag">{{ m.lvl('HYPO') }}</span></h2>
+<p class="small muted">Ordre et durées proposés tant que le professeur n’a pas donné le temps imparti ; la colonne « transition » est à écrire.</p>
+<table class="blank">
+  <thead><tr><th style="width:52mm">Partie</th><th style="width:24mm">Qui</th><th style="width:18mm">Durée</th><th>Phrase de transition</th></tr></thead>
+  <tbody>{% for a, b, d in C.BUDGET_ORAL.lignes %}<tr><td class="lbl"><span style="color:#1d2433">{{ loop.index }}. {{ a|fr }}</span></td><td>{{ m.who(b) }}</td><td>{{ d|fr }}</td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+{% endif %}
+</section>
+
+{# ------------------------------------------------------------------ 4 #}
+<section>
+{{ m.sec('m4', 4, "Entrées et sorties") }}
+<h2 style="margin-top:0">Ce dont tu as besoin</h2>
+<table>
+  <thead><tr><th style="width:36mm">De qui</th><th>Quoi</th><th style="width:38mm">Pour quand</th></tr></thead>
+  <tbody>{% for a, b, c_ in mb.entrees %}<tr><td class="strong">{{ a|fr }}</td><td>{{ b|fr }}</td><td>{{ c_|fr }}</td></tr>{% endfor %}</tbody>
+</table>
+<p class="small muted">Si une entrée n’arrive pas à l’heure, relance la personne par écrit, puis préviens l’Élève 5 au bout de 12&nbsp;h.</p>
+<h2>Ce que les autres attendent de toi</h2>
+<table>
+  <thead><tr><th style="width:36mm">Pour qui</th><th>Quoi</th><th style="width:38mm">Pour quand</th></tr></thead>
+  <tbody>{% for a, b, c_ in mb.sorties %}<tr><td class="strong">{{ a|fr }}</td><td>{{ b|fr }}</td><td>{{ c_|fr }}</td></tr>{% endfor %}</tbody>
+</table>
+
+<div style="height:4mm"></div>
+{{ m.sec('m5', 5, "Définition de « terminé »", first=True) }}
+<p class="lead">Ton travail est terminé quand toutes les cases sont cochées et que ta carte du tableau de suivi est passée en « Terminé ».</p>
+<ul class="checks">{% for x in mb.termine %}<li><span class="bx"></span><span>{{ x|fr }}</span><span></span></li>{% endfor %}</ul>
+
+</section>
+
+{# ------------------------------------------------------------------ 6 #}
+<section>
+{{ m.sec('m6', 6, "Ton calendrier") }}
+<p class="small muted">Extrait de la feuille de route du groupe. ◆ = étape du chemin critique : un retard décale tout le monde.</p>
+<table>
+  <thead><tr><th style="width:16mm">Jour</th><th>Tu travailles sur</th><th style="width:56mm">Tu livres / tu reçois</th></tr></thead>
+  <tbody>
+  {% for d, sts, outs, ins in perso %}
+  <tr><td class="strong">{{ 'J' ~ d if d < 11 else 'Jour J' }}</td>
+      <td>{% for s in sts %}<div>{% if s.critique %}<span class="crit">◆</span> {% endif %}<span class="code">{{ s.code }}</span> {{ s.titre|fr }}{% if n in s.h %} <span class="muted small">· {{ (s.h[n] / (s.j[1] - s.j[0] + 1))|round(1)|h }} ce jour</span>{% endif %}</div>{% endfor %}</td>
+      <td class="small">{% for w, q_ in outs %}<div>→ <strong>{{ w|fr }}</strong> : {{ q_|fr }}</div>{% endfor %}{% for w, q_ in ins %}<div class="muted">← {{ w|fr }} : {{ q_|fr }}</div>{% endfor %}</td></tr>
+  {% endfor %}
+  <tr class="total"><td>Total</td><td colspan="2">{{ tot[n]|h }} sur l’ensemble du projet</td></tr>
+  </tbody>
+</table>
+
+
+
+<div style="height:5mm"></div>
+{{ m.sec('m7', 7, "Règles communes et compte rendu", first=True) }}
+<table>
+  <tbody>{% for a, b in C.REGLES_COMMUNES %}<tr><td class="strong" style="width:34mm">{{ a|fr }}</td><td>{{ b|fr }}</td></tr>{% endfor %}
+  <tr><td class="strong">Points de contrôle</td><td><strong>CP1, jour 3</strong> : validation du corpus (30&nbsp;min). <strong>CP2, jour 9</strong> : répétition générale (1&nbsp;h&nbsp;30). Présence obligatoire ; si tu es absent, préviens ta doublure (Élève {{ doublure }}).</td></tr></tbody>
+</table>
+</section>
+
+{{ m.compte_rendu(n) }}
+{% endblock %}
