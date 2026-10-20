@@ -2,12 +2,12 @@
 {% import "macros.html.j2" as m with context %}
 {% block title %}G4 — Tableau de suivi{% endblock %}
 {% block body %}
-{% set cards = C.ETAPES|rejectattr('code', 'equalto', 'JJ')|list %}
+{% set cards = actives|rejectattr('code', 'equalto', 'JJ')|list %}
 {% set doing = cards|selectattr('j', 'equalto', (1, 1))|list + cards|selectattr('j', 'equalto', (1, 2))|list %}
 {% set todo = cards|reject('in', doing)|list %}
 
 {% macro card(s) %}
-<div class="card{% if s.critique %} is-crit{% endif %}{% if s.get('checkpoint') %} cp{% endif %}">
+<div class="card{% if s.critique %} is-crit{% endif %}{% if s.get('checkpoint') %} cp{% endif %}{% if parked(s) %} parked{% endif %}">
   <div class="top"><span><span class="code">{{ s.code }}</span>{% if s.critique %} <span class="crit">◆</span>{% endif %}</span><span>{{ m.days(s) }} · {{ m.lvl(s.niveau) }}</span></div>
   <div class="tt">{{ s.titre|fr }}</div>
   <div>{{ m.owners(s) }}</div>
@@ -25,11 +25,13 @@
     </div>
   </div>
   <div class="kb">
-    <div class="col todo"><h2>À faire <span class="count">{{ todo|length }}</span></h2><div class="cards">{% for s in todo %}{{ card(s) }}{% endfor %}</div></div>
+    <div class="col todo"><h2>À faire <span class="count">{{ todo|length }}</span></h2><div class="cards">{% for s in todo %}{{ card(s) }}{% endfor %}</div>
+      {% if parked_steps %}<div class="kb-wait"><div class="lbl">En attente · partie D · décision au plus tard au {{ C.ATTENTE_D.reprise|lower }}</div><div class="cards" style="grid-template-columns:1fr 1fr 1fr">{% for s in parked_steps %}{{ card(s) }}{% endfor %}</div></div>{% endif %}
+    </div>
     <div class="col"><h2>En cours <span class="count">{{ doing|length }}</span></h2><div class="cards">{% for s in doing %}{{ card(s) }}{% endfor %}</div></div>
     <div class="col"><h2>À vérifier <span class="count">0</span></h2>
       <div class="drop">Déposer ici la carte quand le livrable est envoyé. Une autre personne que l’auteur vérifie le critère ✓.</div>
-      <div class="kb-rules" style="margin-top:3mm"><strong>Qui vérifie ?</strong><br>Corpus et citations : É1 · Fiche A : É4 · Fiche B : É2 · Fiche C : É3 · Script : É1 · Synthèse : É4 · Le reste : É5.</div>
+      <div class="kb-rules" style="margin-top:3mm"><strong>Qui vérifie ?</strong><br>Corpus et citations : É1 · Fiche A : É4 · Fiche B : É2 · Fiche C : É3 · Synthèse : É4 · Le reste : É5.</div>
     </div>
     <div class="col"><h2>Terminé <span class="count">0</span></h2>
       <div class="drop">Le vérificateur déplace la carte ici et note la date.</div>

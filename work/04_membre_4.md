@@ -82,12 +82,12 @@ Enjeux à nommer : Condition des femmes, Tradition et modernité (« civilisatio
 | J5 | S08 Analyse thématique C1-C4 (4 h 30) |
 | J6 | S08 Analyse thématique C1-C4 (4 h 30) |
 | J7 | S11 Relecture croisée et corrections (2 h) ; S12 Synthèse orale et conducteur de l’oral (30 min) |
-| J8 | S11 Relecture croisée et corrections (2 h) ; S12 Synthèse orale et conducteur de l’oral (30 min) ; S14 Répétition de la scénette (1 h) |
+| J8 | S11 Relecture croisée et corrections (2 h) ; S12 Synthèse orale et conducteur de l’oral (30 min) |
 | J9 | CP2 Point de contrôle 2 : répétition générale (1 h 30) |
 | J10 | S15 Contrôle final et tampon (30 min) |
 | Jour J | JJ Jour J : présentation |
 
-Charge totale : 12 h 30.
+Charge totale : 11 h 30.
 
 ## Définition de « terminé »
 

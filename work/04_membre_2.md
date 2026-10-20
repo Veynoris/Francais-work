@@ -6,7 +6,7 @@ Production attendue (consigne) : *Temps verbaux, lexique, énonciation, connecte
 
 - Tu montres, mot à mot, COMMENT la langue du roman fait sentir la transformation de la mère.
 - Tu réponds aux questions A1 à A3 et tu traites aussi l’énonciation et les connecteurs (ta « production attendue »).
-- Tu conseilles l’Élève 5 sur le langage de la mère avant et après sa transformation.
+- Tu fournis à l’Élève 5 l’idée clé de ta partie pour la synthèse orale.
 
 **Pourquoi c’est important.** La consigne parle de « changements de comportement et de langage ». C’est toi qui prouves que le changement est visible dans les mots eux-mêmes et pas seulement dans l’intrigue.
 
@@ -80,7 +80,6 @@ Production attendue (consigne) : *Temps verbaux, lexique, énonciation, connecte
 | Pour qui | Quoi | Quand |
 |---|---|---|
 | Élève 1 | Repérages (6 à 8 passages) | Jour 2, 18 h |
-| Élève 5 | Conseil langage avant / après pour la scénette | Jour 5 |
 | Élève 1 | Fiche A V1 pour vérification | Jour 6, 18 h |
 | Élève 3 | Relecture de la fiche B | Jour 7, 18 h |
 | Élève 5 | Fiche A V2 (une idée clé pour la synthèse) | Jour 8, 12 h |
@@ -92,15 +91,15 @@ Production attendue (consigne) : *Temps verbaux, lexique, énonciation, connecte
 | J1 | S01 Cadrage et lancement (30 min) ; S03 Repérages par angle d’analyse (1 h 30) |
 | J2 | S03 Repérages par angle d’analyse (1 h 30) |
 | J3 | CP1 Point de contrôle 1 : validation du corpus (30 min) |
-| J4 | S06 Analyse linguistique A1-A3 (4 h) ; S09 Script de la scénette V1 (30 min) |
-| J5 | S06 Analyse linguistique A1-A3 (4 h) ; S09 Script de la scénette V1 (30 min) |
-| J6 | S06 Analyse linguistique A1-A3 (4 h) ; S09 Script de la scénette V1 (30 min) |
+| J4 | S06 Analyse linguistique A1-A3 (4 h) |
+| J5 | S06 Analyse linguistique A1-A3 (4 h) |
+| J6 | S06 Analyse linguistique A1-A3 (4 h) |
 | J7 | S11 Relecture croisée et corrections (2 h) |
-| J8 | S11 Relecture croisée et corrections (2 h) ; S13 Support visuel (si exigé) (1 h) ; S14 Répétition de la scénette (1 h) |
+| J8 | S11 Relecture croisée et corrections (2 h) ; S13 Support visuel (si exigé) (1 h) |
 | J9 | CP2 Point de contrôle 2 : répétition générale (1 h 30) |
 | Jour J | JJ Jour J : présentation |
 
-Charge totale : 12 h 30.
+Charge totale : 11 h.
 
 ## Définition de « terminé »
 

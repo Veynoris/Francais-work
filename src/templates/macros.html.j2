@@ -77,3 +77,12 @@
   <div class="ruled">{% for i in range(17) %}<div></div>{% endfor %}</div>
 </section>
 {% endmacro %}
+
+{% macro attente_box() %}
+<div class="box wait keep">
+  <div class="kicker">Partie D en attente · décision au plus tard au {{ C.ATTENTE_D.reprise|lower }}</div>
+  <p class="small">{{ C.ATTENTE_D.statut|fr }} <strong>{{ C.ATTENTE_D.exige|fr }}</strong></p>
+  <p class="small">{{ C.ATTENTE_D.pourquoi|fr }}</p>
+  <p class="small" style="margin:0">{{ C.ATTENTE_D.pret|fr }}</p>
+</div>
+{% endmacro %}

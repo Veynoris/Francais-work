@@ -22,7 +22,7 @@ Tu n’as pas de question A-D : ta production attendue est le socle de toutes le
 ## Frontières
 
 - Tu dis QUOI et OÙ (étapes, chapitres, pages) ; tu n’analyses pas les temps ni les procédés (Élèves 2 et 3).
-- Tu ne choisis pas l’épisode de la scénette ; tu fournis ses citations à l’Élève 5.
+- Partie D (scénette) en attente : si elle reprend, tu fourniras à l’Élève 5 les citations de l’épisode choisi.
 
 ## Fiche méthode : Construire un tableau de citations référencées
 
@@ -72,7 +72,8 @@ Rapport de vérification :
 |---|---|---|
 | Élève 5 | Fiche de cadrage, règles du corpus | Jour 1 |
 | Élèves 2, 3, 4 | Repérages (6 à 8 passages chacun) | Jour 2, 18 h |
-| Élèves 2, 3, 4, 5 | Fiches A, B, C et script V1 à vérifier | Jour 6, 18 h |
+| Élève 5 | Relevé des chapitres II-6 et II-7 | Jour 3, 12 h |
+| Élèves 2, 3, 4 | Fiches A, B, C V1 à vérifier | Jour 6, 18 h |
 
 ## Sorties (ce que les autres attendent de toi)
 
@@ -80,9 +81,8 @@ Rapport de vérification :
 |---|---|---|
 | Élèves 2 à 5 | Corpus lot 1 (partie I) et chronologie V1 | Jour 2, 18 h |
 | Tous | Corpus V2 complet (25 à 35 citations) | Jour 3, avant CP1 |
-| Élève 5 | Citations de l’épisode retenu | Jour 4, 18 h |
 | Élèves 2 à 5 | Rapport de vérification des citations | Jour 7, 12 h |
-| Élève 5 | Relecture du script (fidélité au texte) | Jour 8, 18 h |
+| Élève 5 | Vérification des citations de la synthèse | Jour 8, 18 h |
 | Tous | Pages converties dans l’édition de la classe | Jour 10, 18 h |
 
 ## Ton calendrier
@@ -90,18 +90,16 @@ Rapport de vérification :
 | Jour | Étapes |
 |---|---|
 | J1 | S01 Cadrage et lancement (30 min) ; S02 Corpus, lot 1 (partie I) et chronologie V1 (3 h) |
-| J2 | S02 Corpus, lot 1 (partie I) et chronologie V1 (3 h) ; S04 Corpus V2 complet (partie II et fusion) (3 h) |
-| J3 | S04 Corpus V2 complet (partie II et fusion) (3 h) ; CP1 Point de contrôle 1 : validation du corpus (30 min) |
-| J4 | S09 Script de la scénette V1 (30 min) |
-| J5 | S09 Script de la scénette V1 (30 min) |
-| J6 | S09 Script de la scénette V1 (30 min) ; S10 Vérification des citations (1 h 30) |
+| J2 | S02 Corpus, lot 1 (partie I) et chronologie V1 (3 h) ; S04 Corpus V2 complet (partie II et fusion) (2 h) |
+| J3 | S04 Corpus V2 complet (partie II et fusion) (2 h) ; CP1 Point de contrôle 1 : validation du corpus (30 min) |
+| J6 | S10 Vérification des citations (1 h 30) |
 | J7 | S10 Vérification des citations (1 h 30) ; S11 Relecture croisée et corrections (1 h) |
-| J8 | S11 Relecture croisée et corrections (1 h) ; S14 Répétition de la scénette (1 h) |
+| J8 | S11 Relecture croisée et corrections (1 h) |
 | J9 | CP2 Point de contrôle 2 : répétition générale (1 h 30) |
 | J10 | S15 Contrôle final et tampon (1 h) |
 | Jour J | JJ Jour J : présentation |
 
-Charge totale : 13 h 30.
+Charge totale : 11 h.
 
 ## Définition de « terminé »
 

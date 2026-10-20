@@ -6,7 +6,7 @@ Production attendue (consigne) : *Procédés d’écriture et effets produits*
 
 - Tu montres par quels procédés d’écriture la transformation de la mère devient visible et quel effet ils produisent.
 - Tu réponds aux questions B1 à B3 : procédés, humour, ironie et décalage, regard du narrateur.
-- Tu conseilles l’Élève 5 sur les ressorts comiques à rendre sur scène.
+- Tu fournis à l’Élève 5 l’idée clé de ta partie pour la synthèse orale.
 
 **Pourquoi c’est important.** Le roman est souvent drôle, et ce rire n’est pas gratuit. Tu expliques ce qu’il fait voir de la mère et des personnages : c’est ce qui distingue une analyse d’un résumé.
 
@@ -20,7 +20,7 @@ Production attendue (consigne) : *Procédés d’écriture et effets produits*
 
 - Les figures et leurs effets sont à toi ; les champs lexicaux et les temps sont à l’Élève 2.
 - Tu interprètes le regard du narrateur ; l’Élève 2 en repère les marques.
-- Tu identifies le comique ; l’Élève 5 décide de ce qui est joué.
+- Partie D en attente : si elle reprend, tu conseilleras l’Élève 5 sur les ressorts comiques, sans écrire le script.
 
 ## Fiche méthode : Procédés d’écriture : procédé → citation → effet
 
@@ -68,7 +68,6 @@ B3 :
 | Pour qui | Quoi | Quand |
 |---|---|---|
 | Élève 1 | Repérages (6 à 8 passages) | Jour 2, 18 h |
-| Élève 5 | Conseil sur les ressorts comiques de l’épisode | Jour 5 |
 | Élève 1 | Fiche B V1 pour vérification | Jour 6, 18 h |
 | Élève 4 | Relecture de la fiche C | Jour 7, 18 h |
 | Élève 5 | Fiche B V2 (une idée clé pour la synthèse) | Jour 8, 12 h |
@@ -80,15 +79,15 @@ B3 :
 | J1 | S01 Cadrage et lancement (30 min) ; S03 Repérages par angle d’analyse (1 h 30) |
 | J2 | S03 Repérages par angle d’analyse (1 h 30) |
 | J3 | CP1 Point de contrôle 1 : validation du corpus (30 min) |
-| J4 | S07 Analyse stylistique B1-B3 (4 h) ; S09 Script de la scénette V1 (30 min) |
-| J5 | S07 Analyse stylistique B1-B3 (4 h) ; S09 Script de la scénette V1 (30 min) |
-| J6 | S07 Analyse stylistique B1-B3 (4 h) ; S09 Script de la scénette V1 (30 min) |
+| J4 | S07 Analyse stylistique B1-B3 (4 h) |
+| J5 | S07 Analyse stylistique B1-B3 (4 h) |
+| J6 | S07 Analyse stylistique B1-B3 (4 h) |
 | J7 | S11 Relecture croisée et corrections (2 h) |
-| J8 | S11 Relecture croisée et corrections (2 h) ; S13 Support visuel (si exigé) (1 h) ; S14 Répétition de la scénette (1 h) |
+| J8 | S11 Relecture croisée et corrections (2 h) ; S13 Support visuel (si exigé) (1 h) |
 | J9 | CP2 Point de contrôle 2 : répétition générale (1 h 30) |
 | Jour J | JJ Jour J : présentation |
 
-Charge totale : 12 h 30.
+Charge totale : 11 h.
 
 ## Définition de « terminé »
 

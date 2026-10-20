@@ -248,3 +248,13 @@ table.gantt th.jj { background: var(--sand-2); }
 .drop { border: 1.5px dashed #cfc7b9; border-radius: 4px; padding: 3mm; color: var(--soft); font-size: 7pt; text-align: center; }
 .kb-rules { margin-top: auto; background: #fff; border-radius: 4px; padding: 2mm 2.2mm; font-size: 6.7pt; line-height: 1.35; color: var(--muted); box-shadow: 0 0 0 .6px var(--line); }
 .kb-rules strong { color: var(--ink); }
+
+/* ---------- Partie en attente ---------- */
+.lvl-WAIT { background: #eceef2; color: #5d6677; box-shadow: inset 0 0 0 1px #cdd2da; }
+.box.wait { background: #f1f2f5; border-left: 3px solid #8a92a1; }
+.box.wait .kicker { color: #5d6677; }
+.step.parked { opacity: .78; border-style: dashed; }
+.step.parked .side { background: #f1f2f5; }
+.card.parked { border-left-color: #b9bfc9; background: #f7f8fa; color: #5d6677; box-shadow: 0 0 0 .6px #cdd2da; }
+.kb-wait { margin-top: 2mm; padding-top: 1.6mm; border-top: 1.5px dashed #cfc7b9; }
+.kb-wait .lbl { font: 700 6.8pt "Inter"; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 .6mm 1.2mm; }
