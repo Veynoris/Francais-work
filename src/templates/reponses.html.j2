@@ -1,67 +1,37 @@
 {% extends "base.html.j2" %}
 {% import "macros.html.j2" as m with context %}
-{% block title %}G4 — Réponses Élève {{ n }}{% endblock %}
-{% block hl %}Réponses · Élève {{ n }} · {{ C.ELEVES[n].role }}{% endblock %}
+{% block title %}G4 — Élève {{ n }}{% endblock %}
+{% block hl %}Groupe 4 · Élève {{ n }} · {{ C.ELEVES[n].court }}{% endblock %}
+{% block hr %}{{ C.META.oeuvre }}{% endblock %}
 {% block body %}
 <div class="rep-head">
   <div class="band-s">{{ m.zellige() }}
     <div class="inner">
       <div class="eyebrow">{{ C.META.groupe }} · {{ C.META.titre|fr }}</div>
-      <h1><span class="who who-{{ n }}">Élève {{ n }}</span> {{ C.ELEVES[n].role|fr }}</h1>
-      <div class="sub">Réponses · <em>{{ C.META.oeuvre }}</em> — {{ C.META.auteur }}</div>
+      <h1>Élève {{ n }} · {{ C.ELEVES[n].court|fr }}</h1>
     </div>
   </div>
-  <div class="rep-meta"><span>Nom : <span class="fillin"></span></span><span class="small muted">Références : partie-chapitre, page du PDF fourni · n° = numéro dans le corpus de l’Élève 1</span></div>
 </div>
 
 {% if n == 1 %}
-<h2 class="rep-sec"><span class="code">1</span> Chronologie de la transformation</h2>
-<table class="zebra">
-  <thead><tr><th style="width:8mm">#</th><th style="width:48mm">Étape</th><th style="width:26mm">Réf.</th><th>Ce qui se passe</th><th class="c" style="width:12mm">Axe</th></tr></thead>
-  <tbody>
-  {% for st in C.CHRONOLOGIE %}
-  {% if st.n == 1 %}<tr><td colspan="5" class="small muted" style="background:#f6f2eb">Partie I · « Être » · narrateur : le fils cadet</td></tr>{% endif %}
-  {% if st.n == 8 %}<tr><td colspan="5" class="small muted" style="background:#f6f2eb">Partie II · « Avoir » · narrateur : Nagib</td></tr>{% endif %}
-  <tr><td class="strong">{{ st.n }}</td><td class="strong">{{ st.titre|fr }}</td><td class="nobr">{{ loc_str(st.loc, st.get('loc2')) }}<br><span class="small muted">p.&nbsp;{{ st.pages }}</span></td><td>{{ st.fait|fr }}</td><td class="c"><span class="code">{{ st.axe }}</span></td></tr>
-  {% endfor %}
-  </tbody>
-</table>
-
-<h2 class="rep-sec"><span class="code">2</span> Corpus de citations ({{ rows|length }})</h2>
-<p class="small muted">Toutes les citations ont été vérifiées mot à mot dans le texte. AX1 : apprentissages et découvertes · AX2 : comportement et langage · AX3 : relations avec la famille et la société.</p>
-<table class="corpus">
-  <thead><tr><th style="width:8mm">N°</th><th>Citation</th><th style="width:21mm">Réf.</th><th class="c" style="width:11mm">Étape</th><th class="c" style="width:11mm">Axe</th><th style="width:20mm">Utilisée par</th></tr></thead>
-  <tbody>
-  {% for q in rows %}
-  <tr><td class="strong">{{ q.n }}</td><td><span class="q" style="font-size:9.2pt">«&nbsp;{{ q.txt|fr }}&nbsp;»</span></td><td class="nobr small">{{ q.loc }}, p.&nbsp;{{ q.page }}</td><td class="c">{{ q.etape }}</td><td class="c"><span class="code">{{ q.axe }}</span></td><td>{% for u in q.users %}{{ m.who(u) }}{% endfor %}</td></tr>
-  {% endfor %}
-  </tbody>
-</table>
-<div class="keep">
-<h2 class="rep-sec"><span class="code">3</span> Bilan du corpus</h2>
-<table>
-  <thead><tr><th>Axe</th><th class="r">Citations</th><th>Étapes couvertes</th></tr></thead>
-  <tbody>
-  {% for code, t in C.CONSIGNE.axes %}{% set sel = rows|selectattr('axe', 'equalto', code)|list %}
-  <tr><td><span class="code">{{ code }}</span> {{ t|fr }}</td><td class="r strong">{{ sel|length }}</td><td>{{ sel|map(attribute='etape')|unique|sort|join(', ') }}</td></tr>
-  {% endfor %}
-  <tr class="total"><td>Total</td><td class="r">{{ rows|length }}</td><td>{{ rows|map(attribute='etape')|unique|list|length }} étapes sur 12</td></tr>
-  </tbody>
-</table>
-</div>
-
+<p>{{ C.CONSIGNE.intro|fr }}</p>
+{% for code, t in C.CONSIGNE.axes %}
+<section class="rep">
+  <h2 class="rep-sec">{{ loop.index }}. {{ t|fr }}</h2>
+  <ul class="ans">
+  {% for q in rows if q.axe == code %}<li><span class="q">«&nbsp;{{ q.txt|fr }}&nbsp;»</span> <span class="ref">(p.&nbsp;{{ q.page }})</span></li>{% endfor %}
+  </ul>
+</section>
+{% endfor %}
 {% else %}
 {% for sec in r.sections %}
 <section class="rep">
-  <h2 class="rep-sec">{% if sec.code in qtxt %}<span class="code">{{ sec.code }}</span> {{ qtxt[sec.code]|fr }}{% else %}{{ sec.titre|fr }}{% endif %}</h2>
-  {% if sec.note %}<p class="small muted"><em>{{ sec.note|fr }}</em></p>{% endif %}
+  <h2 class="rep-sec">{% if sec.code in qtxt %}{{ sec.code }}. {{ qtxt[sec.code]|fr }}{% else %}{{ sec.titre|fr }}{% endif %}</h2>
   {% for kind, val in sec.blocs %}
-    {% if kind == 'cle' %}<div class="cle"><span class="kicker">Idée clé</span>{{ val|ans }}</div>
-    {% elif kind == 'these' %}<div class="cle these"><span class="kicker">Thèse du groupe</span>{{ val|ans }}</div>
+    {% if kind in ('cle', 'these') %}<p class="cle">{{ val|ans }}</p>
     {% elif kind == 'h' %}<h3>{{ val|fr }}</h3>
     {% elif kind == 'ul' %}<ul class="ans">{% for t in val %}<li>{{ t|ans }}</li>{% endfor %}</ul>
     {% elif kind == 'ol' %}<ol class="ans">{% for t in val %}<li>{{ t|ans }}</li>{% endfor %}</ol>
-    {% elif kind == 'say' %}<p class="say">{{ val|ans }}</p>
     {% else %}<p>{{ val|ans }}</p>{% endif %}
   {% endfor %}
 </section>

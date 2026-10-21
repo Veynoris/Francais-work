@@ -271,10 +271,10 @@ table.gantt th.jj { background: var(--sand-2); }
 .band-s .sub em { font-family: "Caladea"; font-size: 10.6pt; }
 .rep-meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; margin-top: 3mm; font-size: 9pt; }
 .rep-meta .fillin { display: inline-block; width: 60mm; border-bottom: 1px solid var(--soft); }
-h2.rep-sec { font-size: 11.6pt; line-height: 1.35; margin: 6mm 0 2.6mm; padding-bottom: 1.6mm; border-bottom: 1.5px solid var(--ink); }
+h2.rep-sec { font-size: 11.6pt; break-after: avoid; line-height: 1.35; margin: 6mm 0 2.6mm; padding-bottom: 1.6mm; border-bottom: 1.5px solid var(--ink); }
 h2.rep-sec .code { font-size: 9pt; background: var(--teal); color: #fff; vertical-align: 1px; margin-right: 1.5mm; }
 section.rep:first-of-type h2.rep-sec { margin-top: 0; }
-.cle { background: var(--teal-50); border-left: 3px solid var(--teal); border-radius: 0 5px 5px 0; padding: 2.6mm 3.6mm; margin: 0 0 3mm; font-weight: 600; break-inside: avoid; }
+.cle { font-weight: 650; font-size: 10pt; margin: 0 0 2.6mm; }
 .cle .kicker { display: block; margin-bottom: .8mm; }
 .cle.these { background: var(--terra-50); border-left-color: var(--terra); font-size: 10.4pt; }
 .cle.these .kicker { color: var(--terra); }

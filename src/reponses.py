@@ -140,14 +140,14 @@ REPONSES = {
                     "**Le changement de temps avec le changement de narrateur.** La partie II, racontée par Nagib dans une lettre, est au passé composé, temps de l’oral : [[parti]]. La scène de la falaise est au présent, qui fige un moment de bilan : [[falaise]].",
                 ]),
             ]},
-            {"code": "Énonciation", "titre": "Énonciation (production attendue)", "blocs": [
+            {"code": "Énonciation", "titre": "Énonciation", "blocs": [
                 ("ul", [
                     "**Deux narrateurs, deux fils.** En partie I, le fils cadet raconte en adulte qui se souvient ; le présent d’énonciation le montre : [[bibliotheque]]. En partie II, Nagib écrit à son frère, et la mère lit par-dessus son épaule : [[interprete]]. La mère est toujours vue par ses fils ; elle n’est jamais narratrice.",
-                    "**La parole de la mère prend de la place.** D’abord des répliques courtes et des questions ; en partie II, de longues tirades ([[ame]]) et même une scène écrite comme du théâtre (II-2 : « MAMAN » face au « SOLDAT »). Elle prend la parole en public.",
+                    "**La parole de la mère prend de la place.** D’abord des répliques courtes et des questions ; en partie II, de longues tirades ([[ame]]) et même une scène écrite comme du théâtre (la scène devant le soldat, à Anfa). Elle prend la parole en public.",
                     "**Le père remarque lui-même le changement de langage** : [[langage]].",
                 ]),
             ]},
-            {"code": "Connecteurs", "titre": "Connecteurs (production attendue)", "blocs": [
+            {"code": "Connecteurs", "titre": "Connecteurs", "blocs": [
                 ("ul", [
                     "**« Mais » (opposition)** : il marque l’obstacle puis son dépassement. [[peux]]",
                     "**« C’est ainsi que » (conséquence)** : il enchaîne les étapes comme des causes et des effets. [[ainsi]] ; [[tablier]]",
@@ -173,7 +173,7 @@ REPONSES = {
                     "**Antithèse des deux titres.** « Être » et « Avoir » structurent le roman ; la mère elle-même choisit : [[etre]]",
                 ]),
             ]},
-            {"code": "B2", "note": "« Le passage » est compris ici comme l’ensemble du roman (à confirmer avec le professeur).", "blocs": [
+            {"code": "B2", "blocs": [
                 ("cle", "L’humour est partout, mais il sert l’émancipation : il rend la mère attachante, désamorce le drame et critique la société sans violence."),
                 ("ul", [
                     "**Le décalage comique (partie I).** La mère interprète la technique avec ses propres repères : [[bonsoir]] ; [[europeens]] ; [[meryem]]. Le rire est tendre, jamais méprisant : il montre sa logique propre et son intelligence pratique.",
@@ -202,14 +202,14 @@ REPONSES = {
             {"code": "C1", "blocs": [
                 ("cle", "L’émancipation progresse en cercles de plus en plus larges : de l’intime à la famille, puis à la société et au monde."),
                 ("ol", [
-                    "**L’enfermement (I-2).** [[personne]] ; [[seuil]]",
-                    "**L’éveil par les objets (I-3 à I-5).** Radio, électricité, téléphone : la découverte passe par les sens, et le téléphone ouvre déjà un premier réseau. [[reseau]]",
-                    "**La sortie et le premier secret (I-6, I-7).** [[monde]] ; [[secret]]",
-                    "**Le savoir et la naissance à soi (I-8, I-9).** [[avidite]] ; [[vit]]",
-                    "**Le doute (I-10).** [[poignante]]",
-                    "**L’affirmation, publique puis privée (II-1 à II-3).** Devant le soldat à Anfa ([[femmes]]), puis face au mari ([[consciente]]).",
-                    "**La rupture avec le passé (II-4, II-5).** [[paix]] ; [[moi]] ; [[inscrite]]",
-                    "**La transmission, l’engagement et le départ (II-6, II-7).** [[actes]] ; [[locomotive]] ; [[horizon]]",
+                    "**L’enfermement.** [[personne]] ; [[seuil]]",
+                    "**L’éveil par les objets.** Radio, électricité, téléphone : la découverte passe par les sens, et le téléphone ouvre déjà un premier réseau. [[reseau]]",
+                    "**La sortie et le premier secret.** [[monde]] ; [[secret]]",
+                    "**Le savoir et la naissance à soi.** [[avidite]] ; [[vit]]",
+                    "**Le doute.** [[poignante]]",
+                    "**L’affirmation, publique puis privée.** Devant le soldat à Anfa ([[femmes]]), puis face au mari ([[consciente]]).",
+                    "**La rupture avec le passé.** [[paix]] ; [[moi]] ; [[inscrite]]",
+                    "**La transmission, l’engagement et le départ.** [[actes]] ; [[locomotive]] ; [[horizon]]",
                 ]),
                 ("p", "**Sens de la progression.** Le parcours suit les titres des deux parties : « Être » (devenir soi), puis « Avoir » (prendre sa place dans le monde)."),
             ]},
@@ -252,7 +252,7 @@ REPONSES = {
                 ]),
                 ("p", "**Nuance.** La partie II s’intitule « Avoir » : la mère acquiert bien des diplômes ([[examens]]). Mais cet « avoir » sert l’« être ». Et l’identité conquise a un prix : [[solitude]]"),
             ]},
-            {"code": "Enjeux", "titre": "Enjeux sociaux et philosophiques (production attendue)", "blocs": [
+            {"code": "Enjeux", "titre": "Enjeux sociaux et philosophiques", "blocs": [
                 ("ul", [
                     "**La condition des femmes.** Les femmes n’ont pas voix au chapitre, et la mère réclame cette voix : [[femmes]]",
                     "**Tradition et modernité.** La vraie civilisation est celle des idées, pas celle des objets : [[objets]]",
@@ -266,18 +266,7 @@ REPONSES = {
     5: {
         "titre": "Synthèse orale",
         "sections": [
-            {"code": "Introduction", "titre": "Introduction (environ 1 min, à dire)", "blocs": [
-                ("say", "Dans La Civilisation, ma Mère !…, publié en 1972, Driss Chraïbi raconte la métamorphose d’une mère marocaine, mariée à treize ans et enfermée dans sa maison. Ses deux fils lui font découvrir la radio, le téléphone, la rue, puis le savoir. Elle finit par tenir tête à son mari, par instruire d’autres femmes et par partir découvrir le monde. Notre question est donc : comment ces péripéties successives la font-elles passer de l’enfermement à l’émancipation, et que conquiert-elle au bout du compte, un savoir ou une identité ? Nous verrons d’abord comment la langue suit ce changement, puis comment l’écriture le rend visible, enfin ce qu’il signifie."),
-            ]},
-            {"code": "Transitions", "titre": "Transitions entre les parties (à dire)", "blocs": [
-                ("ul", [
-                    "**Introduction → A :** « Commençons par les mots eux-mêmes : nous allons voir comment la langue suit la mère pas à pas. »",
-                    "**A → B :** « Les mots changent ; mais comment l’écriture nous fait-elle voir ce changement ? »",
-                    "**B → C :** « Ces procédés rendent la transformation visible. Reste à comprendre ce qu’elle signifie. »",
-                    "**C → synthèse :** « Rassemblons maintenant ce que nous avons découvert. »",
-                ]),
-            ]},
-            {"code": "Synthèse", "titre": "Synthèse (environ 2 min, à dire)", "blocs": [
+            {"code": "Synthèse", "titre": "Synthèse orale", "blocs": [
                 ("say", "Au terme de cette étude, trois constats se rejoignent. D’abord, la langue elle-même change avec la mère : au début, elle est le complément des verbes de ses fils, qui l’habillent et l’entraînent dehors ; à la fin, elle est sujet de verbes d’action et donne des ordres. Ensuite, l’écriture rend cette transformation visible : les images de la prison laissent place à celles de la naissance, et l’humour, toujours tendre, désamorce le drame tout en critiquant une « civilisation » qui modernise les objets sans moderniser les idées. Enfin, le sens de ce parcours est clair : la mère ne veut pas seulement savoir. Le roman le dit lui-même : elle cherche « à être et non à avoir ou posséder ». Le savoir est pour elle l’instrument d’une conquête d’identité, qui se prolonge en action pour les autres femmes et pour son pays."),
                 ("say", "Notre réponse est donc la suivante : la mère conquiert une identité, et le savoir en est le moyen. Cette conquête a un prix, la solitude, mais elle transforme toute la famille, jusqu’au père, qui finit par se lever quand elle entre."),
                 ("say", "Pour ouvrir : le titre, « La Civilisation, ma Mère !… », prend alors tout son sens. La vraie civilisation, dans ce roman, ce ne sont pas la radio ou le fer à repasser : c’est la mère elle-même, devenue, selon le mot du père, « la conscience d’un monde inconscient »."),

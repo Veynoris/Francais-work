@@ -545,12 +545,12 @@ def ans_html(text, cor):
     def sub(mm):
         q = cor[mm.group(1)]
         return (f'<span class="q">«{NBSP}{html.escape(fr_text(q["txt"]), quote=False)}{NBSP}»</span> '
-                f'<span class="ref">{q["loc"]}, p.{NBSP}{q["page"]} · n°{NBSP}{q["n"]}</span>')
+                f'<span class="ref">(p.{NBSP}{q["page"]})</span>')
     return Markup(MARK.sub(sub, str(out)))
 
 
 def ans_md(text, cor):
-    return MARK.sub(lambda mm: f"« {cor[mm.group(1)]['txt']} » ({cor[mm.group(1)]['loc']}, p. {cor[mm.group(1)]['page']}, n° {cor[mm.group(1)]['n']})", text)
+    return MARK.sub(lambda mm: f"« {cor[mm.group(1)]['txt']} » (p. {cor[mm.group(1)]['page']})", text)
 
 
 def build_reponses(c):
@@ -572,28 +572,21 @@ def build_reponses(c):
         jobs.append({"html": str(hp), "pdf": str(OUT / "reponses" / f"{name}.pdf")})
         names.append(name)
         # Markdown
-        L = [f"# Élève {n} — {C.ELEVES[n]['role']} : réponses", ""]
+        L = [f"# Élève {n} — {C.ELEVES[n]['court']}", ""]
         if n == 1:
-            L += ["## Chronologie de la transformation", ""]
-            L += [f"{st['n']}. **{st['titre']}** ({loc_str(st['loc'], st.get('loc2'))}, p. {st['pages']}) — {st['fait']}" for st in C.CHRONOLOGIE]
-            L += ["", "## Corpus de citations", "",
-                  md_table(["N°", "Citation", "Réf.", "Étape", "Axe", "Utilisée par"],
-                           [[q["n"], q["txt"], f"{q['loc']}, p. {q['page']}", q["etape"], q["axe"], ", ".join(f"É{u}" for u in q["users"])] for q in rows])]
+            for code, t in C.CONSIGNE["axes"]:
+                L += [f"## {t}", ""] + [f"- « {q['txt']} » (p. {q['page']})" for q in rows if q["axe"] == code] + [""]
         else:
             for sec in REP.REPONSES[n]["sections"]:
                 head = sec.get("titre") or f"{sec['code']}. {qtxt[sec['code']]}"
                 L += [f"## {head}", ""]
-                if sec.get("note"):
-                    L += [f"*{sec['note']}*", ""]
                 for kind, val in sec["blocs"]:
                     if kind in ("ul", "ol"):
                         L += [("- " if kind == "ul" else f"{i}. ") + ans_md(t, cor) for i, t in enumerate(val, 1)] + [""]
                     elif kind == "h":
                         L += [f"### {val}", ""]
-                    elif kind == "cle":
-                        L += [f"> **Idée clé :** {ans_md(val, cor)}", ""]
-                    elif kind == "these":
-                        L += [f"> **Thèse :** {ans_md(val, cor)}", ""]
+                    elif kind in ("cle", "these"):
+                        L += [f"**{ans_md(val, cor)}**", ""]
                     else:
                         L += [ans_md(val, cor), ""]
         (md_dir / f"{name}.md").write_text("\n".join(L), encoding="utf-8")
