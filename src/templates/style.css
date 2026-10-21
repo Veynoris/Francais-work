@@ -283,3 +283,12 @@ ul.ans li, ol.ans li { margin: 0 0 2.2mm; break-inside: avoid; }
 ul.ans .q, ol.ans .q, p .q, .say .q { font-size: 9.6pt; }
 p.say { font-size: 10.2pt; line-height: 1.55; border-left: 3px solid var(--line); padding-left: 4mm; margin-bottom: 3mm; }
 table.corpus td { padding-top: 1.5mm; padding-bottom: 1.5mm; }
+
+/* ---------- Script ---------- */
+table.trois td { padding: 1.6mm 2mm; }
+.script { margin-top: 2mm; }
+.script h3.temps { font: 700 8pt "Inter"; text-transform: uppercase; letter-spacing: .1em; color: var(--teal); margin: 4mm 0 1.2mm; border-top: 1px solid var(--line); padding-top: 2.4mm; break-after: avoid; }
+.script p.dida { font-style: italic; color: var(--muted); font-size: 9pt; margin: 0 0 1.8mm; }
+.script p.rep-line { margin: 0 0 1.6mm; padding-left: 26mm; text-indent: -26mm; font-size: 9.8pt; break-inside: avoid; }
+.script .who-s { display: inline-block; width: 26mm; text-indent: 0; font: 700 7.8pt "Inter"; letter-spacing: .06em; color: var(--ink); }
+.script .dida-i { font-style: italic; color: var(--muted); }

@@ -92,18 +92,10 @@ def verify_novel():
 PERIODES = [("J1-J3", 1, 3), ("J4-J7", 4, 7), ("J8-J10", 8, 10)]
 
 
-def parked(st):
-    return bool(C.PARTIE_D_EN_ATTENTE and st.get("partie_d"))
-
-
-def actives():
-    return [s for s in C.ETAPES if not parked(s)]
-
-
 def charge():
     tot = {n: 0.0 for n in C.ELEVES}
     per = {n: {p[0]: 0.0 for p in PERIODES} for n in C.ELEVES}
-    for st in actives():
+    for st in C.ETAPES:
         a, b = st["j"]
         days = b - a + 1
         for n, h in st["h"].items():
@@ -112,7 +104,7 @@ def charge():
                 for name, lo, hi in PERIODES:
                     if lo <= d <= hi:
                         per[n][name] += h / days
-    hypo = {n: sum(st["h"].get(n, 0) for st in actives() if st["niveau"] == "HYPO") for n in C.ELEVES}
+    hypo = {n: sum(st["h"].get(n, 0) for st in C.ETAPES if st["niveau"] == "HYPO") for n in C.ELEVES}
     return tot, per, hypo
 
 
@@ -200,16 +192,14 @@ def ctx():
     e_all, e_sans = ecart(list(tot.values())), ecart([tot[n] - hypo[n] for n in tot])
     etapes = {s["code"]: s for s in C.ETAPES}
     gantt = {n: {d: [] for d in range(1, 12)} for n in C.ELEVES}
-    attente_h = {n: sum(s["h"].get(n, 0) for s in C.ETAPES if parked(s)) for n in C.ELEVES}
-    for s in actives():
+    for s in C.ETAPES:
         a, b = s["j"]
         who = list(s["h"]) if s["h"] else list(C.ELEVES)
         for n in who:
             for d in range(a, b + 1):
                 gantt[n][d].append(s)
     return dict(C=C, tot=tot, per=per, hypo=hypo, e_all=e_all, e_sans=e_sans, etapes=etapes,
-                gantt=gantt, periodes=[p[0] for p in PERIODES], attente_h=attente_h, parked=parked,
-                actives=actives(), parked_steps=[s for s in C.ETAPES if parked(s)], quote=quote, loc_str=loc_str,
+                gantt=gantt, periodes=[p[0] for p in PERIODES], quote=quote, loc_str=loc_str,
                 hfmt=hfmt, owners_str=owners_str, niv=lambda k: C.NIVEAUX[k][0])
 
 
@@ -299,8 +289,7 @@ def write_md(c):
                      hfmt(c["hypo"][n]) if c["hypo"][n] else "—"])
     L += [md_table(["Élève", "Plan initial", "Recalculée", *c["periodes"], "dont HYPOTHÈSE (S13)"], rows), "",
           f"Écart max/min : {c['e_all']:.1f} % (avec S13), {c['e_sans']:.1f} % (sans S13). L’écart reste sous 20 %.", "",
-          "Profil temporel : l’Élève 1 travaille surtout aux jours 1 à 3 et l’Élève 5 aux jours 7 à 10. L’Élève 5 aide au corpus de la partie II (S04) pour alléger l’Élève 1 ; la vérification (S10) occupe l’Élève 1 au milieu du projet.", "",
-          "Partie D en attente : les heures de S05, S09 et S14 ne sont pas comptées ci-dessus (" + ", ".join(f"É{n} {hfmt(h)}" for n, h in c["attente_h"].items() if h) + ").", "",
+          "Profil temporel : l’Élève 1 travaille surtout aux jours 1 à 3 et l’Élève 5 aux jours 8 à 10. Pour compenser, la vérification (S10) et la relecture du script (S11) occupent l’Élève 1 au milieu du projet ; l’Élève 5 est occupé dès le jour 1 (cadrage) et le jour 3 (épisodes).", "",
           "## Corrections proposées", ""]
     L += [f"{i}. {a} — *{b}*" for i, (a, b) in enumerate(C.CRITIQUE["corrections"], 1)]
     L += ["", "## Journal des modifications par rapport à plan.md", "", "Les étiquettes [AJOUT] signalent tout ce qui n’existait pas dans plan.md.", ""]
@@ -313,15 +302,14 @@ def write_md(c):
     rows = []
     for s in C.ETAPES:
         a, b = s["j"]
-        rows.append([("◆ " if s["critique"] else "") + ("⏸ " if parked(s) else "") + s["code"], s["titre"] + (" (EN ATTENTE)" if parked(s) else ""), f"J{a}" + (f"-J{b}" if b != a else ""), owners_str(s),
+        rows.append([("◆ " if s["critique"] else "") + s["code"], s["titre"], f"J{a}" + (f"-J{b}" if b != a else ""), owners_str(s),
                      ", ".join(s["prereq"]) or "—", s["livrable"], s["validation"], ", ".join(s["debloque"]) or "—", niv(s["niveau"])])
     L += [md_table(["Code", "Étape", "Jours", "Responsables", "Prérequis", "Livrable", "Critère de validation", "Débloque", "Niveau"], rows), "",
-          "◆ = sur le chemin critique. ⏸ = en attente (partie D) : hors du calendrier actif.", "",
-          f"**Partie D en attente.** {C.ATTENTE_D['statut']} {C.ATTENTE_D['exige']} Décision au plus tard : {C.ATTENTE_D['reprise']}. {C.ATTENTE_D['pourquoi']}", "", "### Actions par étape", ""]
+          "◆ = sur le chemin critique.", "", "### Actions par étape", ""]
     for s in C.ETAPES:
         L += [f"- **{s['code']}** : " + " ; ".join(s["actions"])]
     L += ["", "## Chemin critique", "", " → ".join(C.CHEMIN_CRITIQUE), "",
-          "S03 et S13 ne sont pas critiques. S05, S09 et S14 (partie D) sont en attente.", "",
+          "S05 et S09 (choix de l’épisode et script) ont une marge d’un jour ; S03 et S13 ne sont pas critiques.", "",
           "## Points de contrôle", ""]
     for k, cp in C.CHECKPOINTS.items():
         L += [f"### {k} — {c['etapes'][k]['titre']} ({cp['quand']})", "", f"Réussite : {cp['reussite']}", "", "En cas d’échec :"] + [f"- {x}" for x in cp["echec"]] + [""]
@@ -380,17 +368,11 @@ def md_method(n, fm):
         L += [f"- **{a}** : {b}" for a, b in fm["c4_positions"]]
         L += ["", "Notre thèse en une phrase : ______", "", "Enjeux à nommer : " + ", ".join(fm["enjeux"])]
     elif n == 5:
-        if C.PARTIE_D_EN_ATTENTE:
-            A = C.ATTENTE_D
-            L += [f"> **Partie D en attente** (décision au plus tard au {A['reprise'].lower()}). {A['exige']} {A['pourquoi']}", "",
-                  "Épisodes déjà analysés : voir 01_analyse.md (EP-A, EP-B, EP-C). Recommandation : EP-B, repli EP-A.", ""]
-        else:
-            L += ["Épisodes candidats : voir 01_analyse.md (EP-A, EP-B, EP-C).", "",
-                  md_table(["Rubrique", "À remplir"], [[x, ""] for x in fm["script_entete"]]), ""]
-            for t, aide in fm["temps"]:
-                L += [f"**{t}** — {aide}", "", md_table(fm["temps_colonnes"], [[""] * 3] * 2), ""]
-            L += [md_table(["Répétition", "Quand", "Contenu"], fm["repetitions"]), ""]
-        L += ["Plan de la synthèse orale :", ""]
+        L += ["Épisodes candidats : voir 01_analyse.md (EP-A, EP-B, EP-C).", "",
+              md_table(["Rubrique", "À remplir"], [[x, ""] for x in fm["script_entete"]]), ""]
+        for t, aide in fm["temps"]:
+            L += [f"**{t}** — {aide}", "", md_table(fm["temps_colonnes"], [[""] * 3] * 2), ""]
+        L += [md_table(["Répétition", "Quand", "Contenu"], fm["repetitions"]), "", "Plan de la synthèse orale :", ""]
         L += [f"{i}. **{a}** — {b} : ______" for i, (a, b) in enumerate(fm["synthese"], 1)]
     return L
 
@@ -505,6 +487,19 @@ def chapitre_de(page):
     raise SystemExit(f"page {page} hors chapitre")
 
 
+def merge_script(items):
+    """Fusionne les répliques consécutives d'un même personnage (sans nouvelle didascalie)."""
+    out = []
+    for it in items:
+        if len(it) == 3 and out and len(out[-1]) == 3 and out[-1][0] == it[0] and not it[1]:
+            prev = out[-1][2]
+            sep = " " if prev.rstrip()[-1:] in ".?!…" else ". "
+            out[-1] = (out[-1][0], out[-1][1], prev + sep + it[2])
+        else:
+            out.append(it)
+    return out
+
+
 def corpus():
     """Vérifie chaque citation du corpus et renvoie {id: infos} numérotées dans l'ordre du texte."""
     pages, offsets, full = load_novel()
@@ -512,6 +507,8 @@ def corpus():
     for n, r in REP.REPONSES.items():
         for sec in r["sections"]:
             for kind, val in sec["blocs"]:
+                if kind in ("trois", "script"):
+                    continue
                 for t in (val if isinstance(val, list) else [val]):
                     for k in MARK.findall(t):
                         if k not in REP.CORPUS:
@@ -536,7 +533,29 @@ def corpus():
         raise SystemExit("Corpus des réponses : ÉCHEC\n  " + "\n  ".join(errors))
     for i, k in enumerate(sorted(found, key=lambda x: found[x]["pos"]), 1):
         found[k]["n"] = i
+    # répliques du script : chaque phrase doit figurer telle quelle dans le roman
+    low = full.lower()
+    n_lines = 0
+    for n, r in REP.REPONSES.items():
+        for sec in r["sections"]:
+            for kind, val in sec["blocs"]:
+                if kind != "script":
+                    continue
+                for item in val:
+                    if len(item) != 3:
+                        continue
+                    n_lines += 1
+                    line = item[2]
+                    if squash(line).lower() in low:
+                        continue
+                    parts = [x for x in re.split(r"(?<=[?!.…])\s+", line) if x.strip()]
+                    bad = [x for x in parts if squash(x).lower().rstrip(".!?…") not in low]
+                    if bad:
+                        errors.append(f"script : réplique absente du roman : {bad}")
+    if errors:
+        raise SystemExit("Script : ÉCHEC\n  " + "\n  ".join(errors))
     print(f"[ok] corpus des réponses : {len(found)} citations vérifiées mot à mot, toutes utilisées")
+    print(f"[ok] script : {n_lines} répliques, toutes reprises du texte du roman")
     return found
 
 
@@ -555,6 +574,9 @@ def ans_md(text, cor):
 
 def build_reponses(c):
     cor = corpus()
+    for r in REP.REPONSES.values():
+        for sec in r["sections"]:
+            sec["blocs"] = [(k, merge_script(v) if k == "script" else v) for k, v in sec["blocs"]]
     rows = sorted(cor.values(), key=lambda q: q["n"])
     qtxt = {qid: txt for qid, txt, _ in C.toutes_questions()}
     (OUT / "reponses").mkdir(parents=True, exist_ok=True)
@@ -587,6 +609,14 @@ def build_reponses(c):
                         L += [f"### {val}", ""]
                     elif kind in ("cle", "these"):
                         L += [f"**{ans_md(val, cor)}**", ""]
+                    elif kind == "trois":
+                        L += [f"- **{a}** : {b}" for a, b in val] + [""]
+                    elif kind == "script":
+                        for item in val:
+                            if len(item) == 2:
+                                L += ["", f"### {item[0]}" if item[0] else "", f"*{item[1]}*", ""]
+                            else:
+                                L += [f"**{item[0]}**" + (f" *({item[1]})*" if item[1] else "") + f" : {item[2]}", ""]
                     else:
                         L += [ans_md(val, cor), ""]
         (md_dir / f"{name}.md").write_text("\n".join(L), encoding="utf-8")

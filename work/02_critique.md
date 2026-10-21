@@ -26,17 +26,15 @@ Charge du plan initial : heures annoncées (hors 2 h de répétitions). Charge r
 
 | Élève | Plan initial | Recalculée | J1-J3 | J4-J7 | J8-J10 | dont HYPOTHÈSE (S13) |
 |---|---|---|---|---|---|---|
-| Élève 1 | 6 h | 11 h | 6 h | 2 h | 3 h | — |
-| Élève 2 | 5 h 30 | 11 h | 2 h 30 | 5 h | 3 h 30 | 1 h |
-| Élève 3 | 6 h | 11 h | 2 h 30 | 5 h | 3 h 30 | 1 h |
-| Élève 4 | 6 h | 11 h 30 | 2 h 30 | 6 h | 3 h | — |
-| Élève 5 | 6 h 30 | 11 h | 3 h 30 | 2 h | 5 h 30 | 1 h |
+| Élève 1 | 6 h | 13 h 30 | 7 h | 2 h 30 | 4 h | — |
+| Élève 2 | 5 h 30 | 12 h 30 | 2 h 30 | 5 h 30 | 4 h 30 | 1 h |
+| Élève 3 | 6 h | 12 h 30 | 2 h 30 | 5 h 30 | 4 h 30 | 1 h |
+| Élève 4 | 6 h | 12 h 30 | 2 h 30 | 6 h | 4 h | — |
+| Élève 5 | 6 h 30 | 13 h 30 | 3 h | 5 h | 5 h 30 | — |
 
-Écart max/min : 4.3 % (avec S13), 13.0 % (sans S13). L’écart reste sous 20 %.
+Écart max/min : 7.4 % (avec S13), 14.8 % (sans S13). L’écart reste sous 20 %.
 
-Profil temporel : l’Élève 1 travaille surtout aux jours 1 à 3 et l’Élève 5 aux jours 7 à 10. L’Élève 5 aide au corpus de la partie II (S04) pour alléger l’Élève 1 ; la vérification (S10) occupe l’Élève 1 au milieu du projet.
-
-Partie D en attente : les heures de S05, S09 et S14 ne sont pas comptées ci-dessus (É1 1 h 30, É2 1 h 30, É3 1 h 30, É4 1 h, É5 5 h 30).
+Profil temporel : l’Élève 1 travaille surtout aux jours 1 à 3 et l’Élève 5 aux jours 8 à 10. Pour compenser, la vérification (S10) et la relecture du script (S11) occupent l’Élève 1 au milieu du projet ; l’Élève 5 est occupé dès le jour 1 (cadrage) et le jour 3 (épisodes).
 
 ## Corrections proposées
 
@@ -78,7 +76,6 @@ Les étiquettes [AJOUT] signalent tout ce qui n’existait pas dans plan.md.
 - [MODIF] Corpus livré en deux lots (jour 2 et jour 3).
 - [MODIF] Support visuel : de « Membre 3 » à « Élèves 2 et 3, si exigé ».
 - [SUPPR] Section E fusionnée dans le dossier de l’Élève 5 ; risque « œuvre non identifiée » retiré.
-- [MODIF] Partie D (scénette) mise en attente à la demande du groupe : S05, S09 et S14 sont retirées du calendrier actif ; décision au plus tard au jour 6.
-- [MODIF] Rééquilibrage après la mise en attente : l’Élève 5 relève II-6 et II-7 (S04), écrit l’introduction et les transitions (S12) et assemble le support visuel (S13).
+- [MODIF] Partie D mise en attente, puis réactivée à la demande du groupe ; épisode retenu pour la scénette : l’affrontement avec le père (II-3).
 - [NOTE] La section G de plan.md était déjà d’un seul tenant dans le fichier reçu : il n’y avait rien à fusionner.
 - [NOTE] infos.md est absent : il n’y a ni date limite, ni durée d’oral, ni noms. Le calendrier est donc relatif (Jour 1 à Jour 11) et les noms sont laissés en blanc.

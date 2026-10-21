@@ -72,7 +72,7 @@
   <span class="src">Consigne, mot pour mot · production attendue : « {{ e.prod|fr }} »</span>
 </blockquote>
 {% else %}
-<p>{% if n == 5 %}Tu possèdes la partie D, recopiée mot pour mot ci-dessous (actuellement <strong>en attente</strong>), ainsi que la synthèse orale (production attendue).{% else %}Ces questions sont recopiées mot pour mot depuis la consigne. Toi seul en es responsable ; les autres peuvent t’aider, mais la réponse finale est la tienne.{% endif %}</p>
+<p>{% if n == 5 %}Tu possèdes la partie D, recopiée mot pour mot ci-dessous, ainsi que la synthèse orale (production attendue).{% else %}Ces questions sont recopiées mot pour mot depuis la consigne. Toi seul en es responsable ; les autres peuvent t’aider, mais la réponse finale est la tienne.{% endif %}</p>
 {% for qid in mb.possede %}
 <blockquote class="verbatim keep"><span class="code">{{ qid }}</span>&ensp;{{ qtxt[qid]|fr }}</blockquote>
 {% endfor %}
@@ -198,17 +198,38 @@
 </div>
 
 {% elif n == 5 %}
-{% if C.PARTIE_D_EN_ATTENTE %}{{ m.attente_box() }}{% endif %}
-<h2 style="margin-top:2mm">Les trois épisodes déjà analysés (pour la reprise)</h2>
-<p class="small muted">Détail des trois temps et des citations : plan complet, section 5. Recommandation : EP-B, avec EP-A en repli.</p>
+<h2 style="margin-top:0">Les trois épisodes candidats</h2>
+<p class="small muted">Analysés dans le plan complet (section 5) : chaque épisode y est testé sur les trois temps, avec ses citations. Recommandation : EP-B, avec EP-A en repli.</p>
 <table>
   <thead><tr><th style="width:14mm">Id</th><th>Épisode</th><th style="width:26mm">Réf.</th><th>Verdict</th><th class="c" style="width:16mm">Note /12</th></tr></thead>
   <tbody>{% for ep in C.EPISODES %}<tr><td><span class="code">{{ ep.id }}</span></td><td class="strong">{{ ep.titre|fr }}</td><td>{{ loc_str(ep.loc) }}, p.&nbsp;{{ ep.pages }}</td><td>{{ ep.reco|fr }}</td><td class="c">{{ ep.score|sum }}</td></tr>{% endfor %}</tbody>
 </table>
-<div class="keep">
-<h2>Décision sur la partie D (à noter au plus tard au {{ C.ATTENTE_D.reprise|lower }})</h2>
+<h2>Fiche du script</h2>
 <table class="blank">
-  <tbody>{% for x in ["Décision (reprise / report)", "Date de la décision", "Épisode retenu", "Durée cible de la scène", "Interprètes pressentis"] %}<tr><td class="lbl" style="width:58mm">{{ x|fr }}</td><td></td></tr>{% endfor %}</tbody>
+  <tbody>{% for x in fm.script_entete %}<tr><td class="lbl" style="width:52mm">{{ x|fr }}</td><td></td></tr>{% endfor %}</tbody>
+</table>
+{% for t, aide in fm.temps %}
+<div class="keep">
+<h3>{{ t|fr }}</h3>
+<p class="small muted">{{ aide|fr }}</p>
+<table class="blank tall">
+  <thead><tr><th style="width:16mm">{{ fm.temps_colonnes[0] }}</th><th>{{ fm.temps_colonnes[1]|fr }}</th><th>{{ fm.temps_colonnes[2]|fr }}</th></tr></thead>
+  <tbody>{% for i in range(3) %}<tr><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+{% endfor %}
+<div class="keep">
+<h2>Distribution des rôles</h2>
+<table class="blank">
+  <thead><tr><th>Rôle</th><th>Interprète</th><th>Doublure</th><th>Accessoire</th></tr></thead>
+  <tbody>{% for i in range(5) %}<tr><td></td><td></td><td></td><td></td></tr>{% endfor %}</tbody>
+</table>
+</div>
+<div class="keep">
+<h2>Plan de répétition</h2>
+<table>
+  <thead><tr><th style="width:40mm">Répétition</th><th style="width:32mm">Quand</th><th>Contenu</th><th style="width:22mm">Durée réelle</th></tr></thead>
+  <tbody>{% for a, b, c_ in fm.repetitions %}<tr><td class="strong">{{ a|fr }}</td><td>{{ b|fr }}</td><td>{{ c_|fr }}</td><td></td></tr>{% endfor %}</tbody>
 </table>
 </div>
 <div class="keep">

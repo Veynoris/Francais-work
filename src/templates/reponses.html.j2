@@ -30,6 +30,8 @@
   {% for kind, val in sec.blocs %}
     {% if kind in ('cle', 'these') %}<p class="cle">{{ val|ans }}</p>
     {% elif kind == 'h' %}<h3>{{ val|fr }}</h3>
+    {% elif kind == 'trois' %}<table class="trois keep"><tbody>{% for a, b in val %}<tr><td class="strong" style="width:36mm">{{ a|fr }}</td><td>{{ b|fr }}</td></tr>{% endfor %}</tbody></table>
+    {% elif kind == 'script' %}<div class="script">{% for it in val %}{% if it|length == 2 %}{% if it[0] %}<h3 class="temps">{{ it[0]|fr }}</h3>{% endif %}<p class="dida">{{ it[1]|fr }}</p>{% else %}<p class="rep-line"><span class="who-s">{{ it[0] }}</span>{% if it[1] %} <span class="dida-i">({{ it[1]|fr }})</span>{% endif %} {{ it[2]|fr }}</p>{% endif %}{% endfor %}</div>
     {% elif kind == 'ul' %}<ul class="ans">{% for t in val %}<li>{{ t|ans }}</li>{% endfor %}</ul>
     {% elif kind == 'ol' %}<ol class="ans">{% for t in val %}<li>{{ t|ans }}</li>{% endfor %}</ol>
     {% else %}<p>{{ val|ans }}</p>{% endif %}

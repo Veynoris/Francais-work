@@ -4,11 +4,11 @@ Production attendue (consigne) : *Scénette et synthèse orale*
 
 ## Mission
 
-- Tu rédiges et présentes la synthèse orale qui relie A, B et C et donne la réponse du groupe à C4, avec l’introduction et les transitions.
-- Tu coordonnes le calendrier, le tableau de suivi et le conducteur de l’oral, et tu aides l’Élève 1 sur le corpus de la partie II.
-- La partie D (scénette) est en attente : tu la tiens prête à redémarrer et tu fais trancher le groupe au plus tard au jour 6.
+- Tu choisis, écris et mets en scène la scénette : un épisode montrant une transformation concrète en trois temps.
+- Tu rédiges et présentes la synthèse orale qui relie A, B et C et donne la réponse du groupe à C4.
+- Tu coordonnes le calendrier, le tableau de suivi et le conducteur de l’oral.
 
-**Pourquoi c’est important.** Tu produis la conclusion que le public retient : la réponse du groupe. Tu fais de cinq travaux un seul exposé, et tu es le garant de la partie D, que la consigne exige toujours.
+**Pourquoi c’est important.** Tu produis les deux moments que le public retient : la scène qui rend la transformation visible et la conclusion qui donne la réponse du groupe. Tu es aussi celui qui fait de cinq travaux un seul exposé.
 
 ## Ce que tu possèdes (verbatim)
 
@@ -16,15 +16,49 @@ Production attendue (consigne) : *Scénette et synthèse orale*
 
 ## Frontières
 
-- Partie D en attente : tu ne lances ni le choix de l’épisode ni le script avant la décision du groupe.
+- Tu choisis l’épisode et écris le script ; l’Élève 3 conseille sur le comique, l’Élève 2 sur le langage.
 - Tu présentes la thèse C4 de l’Élève 4 sans la réécrire.
 - Tu tranches la forme (temps, ordre de passage) ; l’Élève 4 tranche le fond.
 
-## Fiche méthode : Synthèse orale et conducteur (partie D en attente)
+## Fiche méthode : Scénette, répétitions et synthèse orale
 
-> **Partie D en attente** (décision au plus tard au jour 6). Elle reste exigée par la consigne. La mettre en attente ne la rend pas facultative. Choisir l’épisode, écrire le script et répéter demandent environ 3 jours. Au-delà du jour 6, la scénette ne peut plus être prête pour la répétition générale (CP2, jour 9).
+Épisodes candidats : voir 01_analyse.md (EP-A, EP-B, EP-C).
 
-Épisodes déjà analysés : voir 01_analyse.md (EP-A, EP-B, EP-C). Recommandation : EP-B, repli EP-A.
+| Rubrique | À remplir |
+|---|---|
+| Épisode retenu |  |
+| Référence (partie-chapitre, pages) |  |
+| Durée cible |  |
+| Rôles et interprètes |  |
+| Accessoires |  |
+| Coupes prévues si dépassement |  |
+
+**Temps 1 : situation initiale** — Montrer la mère « avant » : gestes, langage, place dans la maison.
+
+| Durée | Didascalies (déplacements, ton, gestes) | Répliques (citation n° ou adaptation) |
+|---|---|---|
+|  |  |  |
+|  |  |  |
+
+**Temps 2 : changement** — Le moment où quelque chose bascule : une parole, un acte, une décision.
+
+| Durée | Didascalies (déplacements, ton, gestes) | Répliques (citation n° ou adaptation) |
+|---|---|---|
+|  |  |  |
+|  |  |  |
+
+**Temps 3 : conséquence** — Ce qui a changé de façon visible et durable ; le public doit pouvoir le nommer.
+
+| Durée | Didascalies (déplacements, ton, gestes) | Répliques (citation n° ou adaptation) |
+|---|---|---|
+|  |  |  |
+|  |  |  |
+
+| Répétition | Quand | Contenu |
+|---|---|---|
+| R1 : lecture à la table | Jour 6 ou 7, 30 min | Chacun lit son rôle ; on chronomètre ; on repère les passages trop longs. |
+| R2 : mise en place (S14) | Jour 8, 1 h | Déplacements, accessoires, entrées et sorties ; répliques clés sues par cœur. |
+| R3 : générale (CP2) | Jour 9, 1 h 30 | Oral complet dans l’ordre, chronométré, sans interruption ; débriefing de 10 min. |
 
 Plan de la synthèse orale :
 
@@ -40,21 +74,22 @@ Plan de la synthèse orale :
 
 | De qui | Quoi | Quand |
 |---|---|---|
-| Élève 1 | Consignes de relevé pour II-6 et II-7 | Jour 2 |
-| Élève 1 | Corpus validé | Jour 3 (CP1) |
+| Élève 1 | Corpus validé, puis citations de l’épisode | Jour 3, puis Jour 4, 18 h |
+| Élèves 2 et 3 | Conseils langage et comique pour la scène | Jour 5 |
 | Élève 4 | Thèse C4 en une phrase | Jour 5, 18 h |
 | Élèves 2, 3, 4 | Fiches V2 (une idée clé chacune) | Jour 8, 12 h |
-| Élève 1 | Vérification des citations de la synthèse | Jour 8, 18 h |
+| Élève 1 | Relecture du script | Jour 8, 18 h |
 
 ## Sorties (ce que les autres attendent de toi)
 
 | Pour qui | Quoi | Quand |
 |---|---|---|
 | Tous | Fiche de cadrage, dossier partagé, questions au professeur | Jour 1 |
-| Élève 1 | Relevé des chapitres II-6 et II-7 | Jour 3, 12 h |
-| Tous | Décision sur la partie D (reprise ou report) | Jour 6 |
-| Tous | Synthèse, introduction et conducteur de l’oral | Jour 8, 18 h |
-| Tous | Répétition générale CP2 | Jour 9 |
+| Tous | 3 épisodes candidats présentés | Jour 3 (CP1) |
+| Tous | Épisode choisi et rôles distribués | Jour 4, 18 h |
+| Élève 1 | Script V1 pour vérification | Jour 6, 18 h |
+| Tous | Synthèse et conducteur de l’oral | Jour 8, 18 h |
+| Tous | Répétitions S14 et CP2 | Jours 8 et 9 |
 | Tous | Checklist finale cochée | Jour 10 |
 
 ## Ton calendrier
@@ -62,26 +97,26 @@ Plan de la synthèse orale :
 | Jour | Étapes |
 |---|---|
 | J1 | S01 Cadrage et lancement (2 h) |
-| J2 | S04 Corpus V2 complet (partie II et fusion) (1 h) |
-| J3 | S04 Corpus V2 complet (partie II et fusion) (1 h) ; CP1 Point de contrôle 1 : validation du corpus (30 min) |
-| J5 |  |
-| J6 |  |
-| J7 | S11 Relecture croisée et corrections (1 h) ; S12 Synthèse orale et conducteur de l’oral (3 h) |
-| J8 | S11 Relecture croisée et corrections (1 h) ; S12 Synthèse orale et conducteur de l’oral (3 h) ; S13 Support visuel (si exigé) (1 h) |
+| J3 | CP1 Point de contrôle 1 : validation du corpus (30 min) ; S05 Choix de l’épisode de la scénette (1 h 30) |
+| J4 | S05 Choix de l’épisode de la scénette (1 h 30) ; S09 Script de la scénette V1 (2 h 30) |
+| J5 | S09 Script de la scénette V1 (2 h 30) |
+| J6 | S09 Script de la scénette V1 (2 h 30) |
+| J7 | S11 Relecture croisée et corrections (1 h) ; S12 Synthèse orale et conducteur de l’oral (2 h) |
+| J8 | S11 Relecture croisée et corrections (1 h) ; S12 Synthèse orale et conducteur de l’oral (2 h) ; S14 Répétition de la scénette (1 h 30) |
 | J9 | CP2 Point de contrôle 2 : répétition générale (1 h 30) |
 | J10 | S15 Contrôle final et tampon (1 h) |
 | Jour J | JJ Jour J : présentation |
 
-Charge totale : 11 h.
+Charge totale : 13 h 30.
 
 ## Définition de « terminé »
 
-- [ ] Le relevé des chapitres II-6 et II-7 est livré et vérifié par l’Élève 1.
+- [ ] L’épisode est choisi et justifié par la grille en 3 temps.
+- [ ] Le script a 3 temps identifiables et chaque réplique clé est sourcée.
+- [ ] Les rôles sont distribués et les coupes prévues sont marquées.
 - [ ] La synthèse cite au moins un apport de A, de B et de C et répond à C4.
-- [ ] L’introduction et les phrases de transition sont écrites.
 - [ ] Le conducteur indique l’ordre, le minutage et les transitions.
-- [ ] La répétition générale (CP2) a eu lieu et l’oral tient dans le temps.
-- [ ] La décision sur la partie D est prise et notée (jour 6 au plus tard).
+- [ ] Deux répétitions chronométrées ont eu lieu (S14, CP2).
 - [ ] La checklist finale est cochée.
 
 ## Règles communes

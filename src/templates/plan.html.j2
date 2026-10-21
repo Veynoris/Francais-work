@@ -54,7 +54,7 @@
   <tr><td class="strong">A. Analyse linguistique (A1–A3)</td><td>{{ m.who(2) }} {{ C.ELEVES[2].role }}</td><td>Questions A1–A3 + production attendue</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
   <tr><td class="strong">B. Analyse stylistique (B1–B3)</td><td>{{ m.who(3) }} {{ C.ELEVES[3].role }}</td><td>Questions B1–B3 + production attendue</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
   <tr><td class="strong">C. Analyse thématique (C1–C4)</td><td>{{ m.who(4) }} {{ C.ELEVES[4].role }}</td><td>Questions C1–C4 + production attendue</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
-  <tr><td class="strong">D. Scénette en trois temps <span class="lvl lvl-WAIT">En attente</span></td><td>{{ m.who(5) }} {{ C.ELEVES[5].role }}</td><td>Consigne D · décision au {{ C.ATTENTE_D.reprise|lower }}</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
+  <tr><td class="strong">D. Scénette en trois temps</td><td>{{ m.who(5) }} {{ C.ELEVES[5].role }}</td><td>Consigne D</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
   <tr><td class="strong">Synthèse orale</td><td>{{ m.who(5) }} {{ C.ELEVES[5].role }}</td><td>Production attendue de l’Élève 5</td><td class="c">{{ m.lvl('EXIGE') }}</td></tr>
   <tr><td class="strong">Support visuel</td><td>{{ m.who(2) }} {{ m.who(3) }}</td><td>Non mentionné par la consigne</td><td class="c">{{ m.lvl('HYPO') }}</td></tr>
   </tbody>
@@ -65,7 +65,7 @@
   <li><strong>Six règles de frontière</strong> entre les rôles, pour éviter les doublons A/B et les trous à l’oral.</li>
   <li><strong>La thèse C4 dès le jour 5</strong> : elle devient le fil rouge de toutes les parties et de la synthèse.</li>
   <li><strong>Deux points de contrôle avec plan de repli</strong> : validation du corpus (J3) et répétition générale (J9).</li>
-  <li><strong>La partie D est mise en attente</strong> : trois épisodes sont déjà analysés (recommandation : II-3, repli : I-6) ; le groupe décide au plus tard au {{ C.ATTENTE_D.reprise|lower }}.</li>
+  <li><strong>Un épisode recommandé pour la scénette</strong> : l’affrontement avec le père (II-3), avec la première sortie (I-6) en repli.</li>
 </ol>
 </section>
 
@@ -147,7 +147,6 @@
 {# ------------------------------------------------------------------ 5 #}
 <section>
 {{ m.sec('s5', 5, "La scénette : trois épisodes candidats") }}
-{% if C.PARTIE_D_EN_ATTENTE %}{{ m.attente_box() }}{% endif %}
 <p class="lead">Chaque épisode est testé sur les trois temps exigés par la consigne. Le choix final appartient au groupe (vote à l’étape S05).</p>
 {% for ep in C.EPISODES %}
 <div class="episode">
@@ -186,7 +185,7 @@
   {% for n, mm in C.MEMBRES.items() %}
   <tr><td>{{ m.who(n) }}</td><td><strong>{{ C.ELEVES[n].role|fr }}</strong><br><span class="small muted">{{ mm.mission[0]|fr }}</span></td>
       <td>{% if mm.possede %}{% for q_ in mm.possede %}<span class="code">{{ q_ }}</span> {% endfor %}{% else %}<span class="small">Corpus, axes AX1–AX3</span>{% endif %}{% if n == 5 %}<br><span class="small">+ synthèse orale</span>{% endif %}</td>
-      <td class="small">{% for s in actives if s.h.get(n, 0) >= 1.5 %}<div style="padding:.3mm 0"><span class="code">{{ s.code }}</span> {{ s.titre|fr }}</div>{% endfor %}</td>
+      <td class="small">{% for s in C.ETAPES if s.h.get(n, 0) >= 1.5 %}<div style="padding:.3mm 0"><span class="code">{{ s.code }}</span> {{ s.titre|fr }}</div>{% endfor %}</td>
       <td class="r strong">{{ tot[n]|h }}</td></tr>
   {% endfor %}
   </tbody>
@@ -195,18 +194,18 @@
 <h2>Charge recalculée et profil dans le temps</h2>
 <p class="small muted">Heures = somme des étapes de la feuille de route (réunions et répétitions comprises). La lecture complète du roman, supposée déjà faite en classe, n’est pas comptée.</p>
 <table class="keep">
-  <thead><tr><th>Élève</th>{% for p in periodes %}<th class="r">{{ p }}</th>{% endfor %}<th class="r">Total</th><th class="r">dont {{ m.lvl('HYPO') }}</th><th class="r">En attente (D)</th><th class="r">Plan initial*</th></tr></thead>
+  <thead><tr><th>Élève</th>{% for p in periodes %}<th class="r">{{ p }}</th>{% endfor %}<th class="r">Total</th><th class="r">dont {{ m.lvl('HYPO') }}</th><th class="r">Plan initial*</th></tr></thead>
   <tbody>
   {% for n in C.ELEVES %}
-  <tr><td>{{ m.who(n) }} {{ C.ELEVES[n].court }}</td>{% for p in periodes %}<td class="r">{{ ((per[n][p] * 2)|round / 2)|h }}</td>{% endfor %}<td class="r strong">{{ tot[n]|h }}</td><td class="r">{{ hypo[n]|h if hypo[n] else '—' }}</td><td class="r muted">{{ attente_h[n]|h if attente_h[n] else '—' }}</td><td class="r muted">{{ C.PLAN_INITIAL_CHARGE[n]|h }}</td></tr>
+  <tr><td>{{ m.who(n) }} {{ C.ELEVES[n].court }}</td>{% for p in periodes %}<td class="r">{{ ((per[n][p] * 2)|round / 2)|h }}</td>{% endfor %}<td class="r strong">{{ tot[n]|h }}</td><td class="r">{{ hypo[n]|h if hypo[n] else '—' }}</td><td class="r muted">{{ C.PLAN_INITIAL_CHARGE[n]|h }}</td></tr>
   {% endfor %}
   </tbody>
 </table>
 </div>
-<p class="small">Écart entre la charge la plus forte et la plus faible : <strong>{{ "%.1f"|format(e_all)|replace('.', ',') }}&nbsp;%</strong> ({{ "%.1f"|format(e_sans)|replace('.', ',') }}&nbsp;% si le support visuel n’est pas demandé), sous le seuil de 20&nbsp;%. Les heures « en attente » (partie D) ne sont pas comptées ; elles s’ajouteront à la reprise. <span class="muted">* Le plan initial annonçait ces heures hors 2&nbsp;h de répétitions, sans compter réunions ni relectures.</span></p>
+<p class="small">Écart entre la charge la plus forte et la plus faible : <strong>{{ "%.1f"|format(e_all)|replace('.', ',') }}&nbsp;%</strong> ({{ "%.1f"|format(e_sans)|replace('.', ',') }}&nbsp;% si le support visuel n’est pas demandé), sous le seuil de 20&nbsp;%. <span class="muted">* Le plan initial annonçait ces heures hors 2&nbsp;h de répétitions, sans compter réunions ni relectures.</span></p>
 <div class="box keep">
   <div class="kicker">Lecture du profil</div>
-  <p class="small">L’Élève 1 travaille surtout en début de projet (corpus) et l’Élève 5 en fin de projet (synthèse, conducteur, répétition). L’Élève 5 relève les chapitres II-6 et II-7 pour alléger l’Élève 1 ; la vérification des citations maintient l’Élève 1 actif au milieu du projet.</p>
+  <p class="small">L’Élève 1 travaille surtout en début de projet (corpus) et l’Élève 5 en fin de projet (script, synthèse, répétitions). La vérification des citations et la relecture du script maintiennent l’Élève 1 actif au milieu du projet ; le cadrage et le choix de l’épisode occupent l’Élève 5 dès les jours 1 à 4.</p>
 </div>
 <h2>Doublures</h2>
 <p class="small muted">Chaque élève connaît assez la partie de sa doublure pour la présenter en cas d’absence.</p>
@@ -214,7 +213,7 @@
   <thead><tr><th>Titulaire</th><th>Doublure</th><th>Ce que la doublure doit pouvoir faire</th></tr></thead>
   <tbody>
   {% for a, b in C.DOUBLURES %}
-  <tr><td>{{ m.who(a) }} {{ C.ELEVES[a].court }}</td><td>{{ m.who(b) }} {{ C.ELEVES[b].court }}</td><td class="small">{% if a == 5 %}Présenter l’introduction et la synthèse{% elif a == 1 %}Présenter la chronologie et répondre sur une citation{% else %}Présenter la fiche {{ 'ABC'[a-2] }} à partir de la V2{% endif %}</td></tr>
+  <tr><td>{{ m.who(a) }} {{ C.ELEVES[a].court }}</td><td>{{ m.who(b) }} {{ C.ELEVES[b].court }}</td><td class="small">{% if a == 5 %}Présenter la synthèse et tenir un rôle de la scénette{% elif a == 1 %}Présenter la chronologie et répondre sur une citation{% else %}Présenter la fiche {{ 'ABC'[a-2] }} à partir de la V2{% endif %}</td></tr>
   {% endfor %}
   </tbody>
 </table>
@@ -226,9 +225,9 @@
 <p class="lead">Calendrier relatif : la date limite n’est pas encore connue. Dès qu’elle l’est, on remplace J11 par la date du Jour J et on remonte jour par jour. Le jour 10 reste un tampon.</p>
 <h2 style="margin-top:0">Chemin critique</h2>
 <div class="path">{% for c_ in C.CHEMIN_CRITIQUE %}<span class="n">{{ c_ }}</span>{% if not loop.last %}<span class="a">→</span>{% endif %}{% endfor %}</div>
-<p class="small muted">Un retard sur ces étapes repousse le Jour J. S03 et S13 ne sont pas critiques. S05, S09 et S14 (partie D) sont en attente, hors calendrier.</p>
+<p class="small muted">Un retard sur ces étapes repousse le Jour J. S05 et S09 (épisode, script) ont un jour de marge ; S03 et S13 ne sont pas critiques.</p>
 <h2>Étapes</h2>
-{% for s in actives %}
+{% for s in C.ETAPES %}
 <div class="step{% if s.critique %} is-crit{% endif %}{% if s.get('checkpoint') %} cp{% endif %}">
   <div class="side"><span class="c">{{ s.code }}</span><span class="d">{{ m.days(s) }}</span>{% if s.critique %}<span class="crit-flag">◆ critique</span>{% endif %}</div>
   <div class="main">
@@ -245,28 +244,6 @@
 </div>
 {% endfor %}
 
-{% if parked_steps %}
-<div class="keep">
-<h2>Étapes en attente (partie D)</h2>
-{{ m.attente_box() }}
-</div>
-{% for s in parked_steps %}
-<div class="step parked">
-  <div class="side"><span class="c">{{ s.code }}</span><span class="d">prévu<br><span class="nobr">{{ m.days(s) }}</span></span><span class="crit-flag" style="color:#8a92a1">en attente</span></div>
-  <div class="main">
-    <div class="title"><strong>{{ s.titre|fr }}</strong><span>{{ m.lvl(s.niveau) }}</span></div>
-    <div class="kv">
-      <div class="k">Qui</div><div>{{ m.owners(s) }}</div>
-      <div class="k">Prérequis</div><div>{% for p in s.prereq %}<span class="code">{{ p }}</span> {% else %}—{% endfor %}</div>
-      <div class="k">Actions</div><div class="wide">{{ s.actions|join(' · ')|fr }}</div>
-      <div class="k">Livrable</div><div>{{ s.livrable|fr }}</div>
-      <div class="k">Charge</div><div>{% for n_, h_ in s.h|dictsort %}É{{ n_ }} {{ h_|h }}{% if not loop.last %}, {% endif %}{% endfor %}</div>
-    </div>
-  </div>
-</div>
-{% endfor %}
-{% endif %}
-
 <h2>Points de contrôle</h2>
 <div class="grid2">
 {% for k, cp in C.CHECKPOINTS.items() %}
@@ -282,7 +259,7 @@
 
 <div class="keep">
 <h2>Vue d’ensemble (Gantt)</h2>
-<p class="small muted">Une ligne par élève, une colonne par jour. Les étapes cerclées de rouge sont sur le chemin critique ; les étapes en pointillés jaunes sont conditionnelles (HYPOTHÈSE). Les étapes de la partie D, en attente, n’y figurent pas.</p>
+<p class="small muted">Une ligne par élève, une colonne par jour. Les étapes cerclées de rouge sont sur le chemin critique ; les étapes en pointillés jaunes sont conditionnelles (HYPOTHÈSE).</p>
 <table class="gantt">
   <thead><tr><th class="first">Élève</th>{% for d in range(1, 12) %}<th class="{{ 'jj' if d == 11 }}">{{ 'J' ~ d if d < 11 else 'Jour J' }}</th>{% endfor %}<th class="tot">Total</th></tr></thead>
   <tbody>
@@ -299,8 +276,8 @@
   <tbody>
   {% set half = (C.ETAPES|length + 1) // 2 %}
   {% for i in range(half) %}{% set a_ = C.ETAPES[i] %}{% set b_ = C.ETAPES[i + half] if i + half < C.ETAPES|length else None %}
-  <tr><td><span class="code">{{ a_.code }}</span></td><td>{{ a_.titre|fr }}{% if parked(a_) %} <span class="lvl lvl-WAIT">En attente</span>{% endif %}</td><td>{{ m.days(a_) }}</td>
-      {% if b_ %}<td><span class="code">{{ b_.code }}</span></td><td>{{ b_.titre|fr }}{% if parked(b_) %} <span class="lvl lvl-WAIT">En attente</span>{% endif %}</td><td>{{ m.days(b_) }}</td>{% else %}<td></td><td></td><td></td>{% endif %}</tr>
+  <tr><td><span class="code">{{ a_.code }}</span></td><td>{{ a_.titre|fr }}</td><td>{{ m.days(a_) }}</td>
+      {% if b_ %}<td><span class="code">{{ b_.code }}</span></td><td>{{ b_.titre|fr }}</td><td>{{ m.days(b_) }}</td>{% else %}<td></td><td></td><td></td>{% endif %}</tr>
   {% endfor %}
   </tbody>
 </table>
@@ -361,7 +338,7 @@
   <tr><td>Fiche A (relue par un autre analyste)</td><td>{{ m.who(4) }}</td><td>S11 (J7)</td></tr>
   <tr><td>Fiche B</td><td>{{ m.who(2) }}</td><td>S11 (J7)</td></tr>
   <tr><td>Fiche C</td><td>{{ m.who(3) }}</td><td>S11 (J7)</td></tr>
-  <tr><td>Citations de la synthèse et de l’introduction</td><td>{{ m.who(1) }}</td><td>S12 (J8)</td></tr>
+  <tr><td>Fidélité du script au texte</td><td>{{ m.who(1) }}</td><td>S11 (J8)</td></tr>
   <tr><td>Thèse C4 dans la synthèse</td><td>{{ m.who(4) }}</td><td>S12 (J8)</td></tr>
   <tr><td>Temps, ordre, transitions</td><td>{{ m.who(5) }}</td><td>CP2 (J9)</td></tr>
   <tr><td>Cohérence de fond entre les parties</td><td>{{ m.who(4) }}</td><td>S15 (J10)</td></tr>
@@ -377,7 +354,6 @@
 {% for k, t in C.CHECKLIST_FINALE %}<li><span class="bx"></span><span>{{ t|fr }}</span><span>{{ m.lvl(k) }}</span></li>{% endfor %}
 </ul>
 
-<div class="keep">
 <div style="height:6mm"></div>
 {{ m.sec('s11', 11, "Plan d’action immédiat", first=True) }}
 <p class="lead">Ce qu’il faut faire dès aujourd’hui pour lancer le projet sans attendre.</p>
@@ -389,7 +365,6 @@
   {% endfor %}
   </tbody>
 </table>
-</div>
 </section>
 
 {# ------------------------------------------------------------------ 12 #}
