@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
 sys.path.insert(0, str(SRC))
 import content as C  # noqa: E402
+import reponses as REP  # noqa: E402
 
 BUILD = ROOT / "build"
 OUT = ROOT / "output"
@@ -491,12 +492,131 @@ def build_docs(c, png=False):
     return report
 
 
+# ---------------------------------------------------------------------------
+# 6. Réponses par élève (output/reponses, reponses/)
+# ---------------------------------------------------------------------------
+MARK = re.compile(r"\[\[(\w+)\]\]")
+
+
+def chapitre_de(page):
+    for loc, (a, b) in C.CHAPITRES.items():
+        if a <= page <= b:
+            return loc
+    raise SystemExit(f"page {page} hors chapitre")
+
+
+def corpus():
+    """Vérifie chaque citation du corpus et renvoie {id: infos} numérotées dans l'ordre du texte."""
+    pages, offsets, full = load_novel()
+    users = {k: set() for k in REP.CORPUS}
+    for n, r in REP.REPONSES.items():
+        for sec in r["sections"]:
+            for kind, val in sec["blocs"]:
+                for t in (val if isinstance(val, list) else [val]):
+                    for k in MARK.findall(t):
+                        if k not in REP.CORPUS:
+                            raise SystemExit(f"Élève {n} : citation inconnue [[{k}]]")
+                        users[k].add(n)
+    errors, found = [], {}
+    for k, (txt, axe) in REP.CORPUS.items():
+        sq = squash(txt)
+        idx = full.find(sq)
+        if idx < 0:
+            errors.append(f"{k}: introuvable : {txt}")
+            continue
+        if full.find(sq, idx + 1) >= 0:
+            errors.append(f"{k}: plusieurs occurrences, citation ambiguë")
+        if not users[k]:
+            errors.append(f"{k}: citation jamais utilisée")
+        page = page_of(idx, offsets)
+        loc = chapitre_de(page)
+        found[k] = {"id": k, "txt": txt, "axe": axe, "page": page, "loc": loc_str(loc), "etape": REP.ETAPE_DE_CHAPITRE[loc],
+                    "pos": idx, "users": sorted(users[k])}
+    if errors:
+        raise SystemExit("Corpus des réponses : ÉCHEC\n  " + "\n  ".join(errors))
+    for i, k in enumerate(sorted(found, key=lambda x: found[x]["pos"]), 1):
+        found[k]["n"] = i
+    print(f"[ok] corpus des réponses : {len(found)} citations vérifiées mot à mot, toutes utilisées")
+    return found
+
+
+def ans_html(text, cor):
+    out = fr(text)
+    def sub(mm):
+        q = cor[mm.group(1)]
+        return (f'<span class="q">«{NBSP}{html.escape(fr_text(q["txt"]), quote=False)}{NBSP}»</span> '
+                f'<span class="ref">{q["loc"]}, p.{NBSP}{q["page"]} · n°{NBSP}{q["n"]}</span>')
+    return Markup(MARK.sub(sub, str(out)))
+
+
+def ans_md(text, cor):
+    return MARK.sub(lambda mm: f"« {cor[mm.group(1)]['txt']} » ({cor[mm.group(1)]['loc']}, p. {cor[mm.group(1)]['page']}, n° {cor[mm.group(1)]['n']})", text)
+
+
+def build_reponses(c):
+    cor = corpus()
+    rows = sorted(cor.values(), key=lambda q: q["n"])
+    qtxt = {qid: txt for qid, txt, _ in C.toutes_questions()}
+    (OUT / "reponses").mkdir(parents=True, exist_ok=True)
+    md_dir = ROOT / "reponses"
+    md_dir.mkdir(exist_ok=True)
+    e = env()
+    e.filters["ans"] = lambda t: ans_html(t, cor)
+    css = (SRC / "templates" / "style.css").read_text(encoding="utf-8")
+    jobs, names = [], []
+    for n in C.ELEVES:
+        name = f"G4_Reponses_Eleve{n}"
+        h = e.get_template("reponses.html.j2").render(css=Markup(css), n=n, r=REP.REPONSES.get(n), rows=rows, qtxt=qtxt, **c)
+        hp = BUILD / f"{name}.html"
+        hp.write_text(h, encoding="utf-8")
+        jobs.append({"html": str(hp), "pdf": str(OUT / "reponses" / f"{name}.pdf")})
+        names.append(name)
+        # Markdown
+        L = [f"# Élève {n} — {C.ELEVES[n]['role']} : réponses", ""]
+        if n == 1:
+            L += ["## Chronologie de la transformation", ""]
+            L += [f"{st['n']}. **{st['titre']}** ({loc_str(st['loc'], st.get('loc2'))}, p. {st['pages']}) — {st['fait']}" for st in C.CHRONOLOGIE]
+            L += ["", "## Corpus de citations", "",
+                  md_table(["N°", "Citation", "Réf.", "Étape", "Axe", "Utilisée par"],
+                           [[q["n"], q["txt"], f"{q['loc']}, p. {q['page']}", q["etape"], q["axe"], ", ".join(f"É{u}" for u in q["users"])] for q in rows])]
+        else:
+            for sec in REP.REPONSES[n]["sections"]:
+                head = sec.get("titre") or f"{sec['code']}. {qtxt[sec['code']]}"
+                L += [f"## {head}", ""]
+                if sec.get("note"):
+                    L += [f"*{sec['note']}*", ""]
+                for kind, val in sec["blocs"]:
+                    if kind in ("ul", "ol"):
+                        L += [("- " if kind == "ul" else f"{i}. ") + ans_md(t, cor) for i, t in enumerate(val, 1)] + [""]
+                    elif kind == "h":
+                        L += [f"### {val}", ""]
+                    elif kind == "cle":
+                        L += [f"> **Idée clé :** {ans_md(val, cor)}", ""]
+                    elif kind == "these":
+                        L += [f"> **Thèse :** {ans_md(val, cor)}", ""]
+                    else:
+                        L += [ans_md(val, cor), ""]
+        (md_dir / f"{name}.md").write_text("\n".join(L), encoding="utf-8")
+    print_pdfs(jobs)
+    for name in names:
+        pdf = OUT / "reponses" / f"{name}.pdf"
+        for i, t in enumerate(pdf_pages_text(pdf), 1):
+            if len(t) < 40:
+                raise SystemExit(f"{name} p. {i} : page vide")
+        print(f"     reponses/{name}.pdf : {len(pypdf.PdfReader(str(pdf)).pages)} page(s)")
+    return names
+
+
 def main():
     verify_novel()
     checks()
     c = ctx()
     write_md(c)
     build_docs(c, png="--png" in sys.argv)
+    names = build_reponses(c)
+    if "--png" in sys.argv:
+        for name in names:
+            subprocess.run(["pdftoppm", "-r", "60", "-png", str(OUT / "reponses" / f"{name}.pdf"), str(BUILD / "preview" / name)], check=True)
 
 
 if __name__ == "__main__":
